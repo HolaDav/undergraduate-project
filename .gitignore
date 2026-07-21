@@ -1,0 +1,26 @@
+# 1. Ignore all raw neuroimaging data types globally
+*.nii
+*.nii.gz
+*.hdr
+*.img
+
+# 2. Ignore data folder contents completely
+data/*
+
+# 3. Ignore results folder contents completely
+results/*
+
+#4. Ignore Source Data contents completely
+sourcedata/*
+
+# 5. EXCEPTIONS: Force Git to track your figures and tables
+!results/**/*.png
+!results/**/*.jpg
+!results/**/*.jpeg
+!results/**/*.csv
+!results/**/*.md
+
+# 6. Code environment cleanup
+*.log
+__pycache__/
+.DS_Store
