@@ -4,7 +4,7 @@ PROJECT=~/Desktop/workspace/undergraduate_project
 
 OUTFILE=$PROJECT/docs/subject_manifest.csv
 
-echo "participant_id,group,mri_file,pet_file,status" > $OUTFILE
+echo "participant_id,group,mri_file,pet_file,preprocessing,qc,centiloid,runtime_minutes,status" > $OUTFILE
 
 for subdir in $PROJECT/rawdata/sub-*
 do
@@ -20,7 +20,7 @@ do
     mri=$(basename $subdir/anat/*.nii)
     pet=$(basename $subdir/pet/*.nii)
 
-    echo "${subject},${group},${mri},${pet},pending" >> $OUTFILE
+    echo "${subject},${group},${mri},${pet},pending,pending,pending,,pending" >> $OUTFILE
 
 done
 
