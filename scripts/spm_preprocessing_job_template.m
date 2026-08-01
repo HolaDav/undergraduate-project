@@ -43,7 +43,48 @@ matlabbatch = {};
 % PET -> MRI Coregistration
 % -------------------------------------------------------------------------
 
-% (To be added)
+% Reference image (MRI)
+matlabbatch{1}.spm.spatial.coreg.estimate.ref = {
+    [mri_file ',1']
+};
+
+% Source image (PET)
+matlabbatch{1}.spm.spatial.coreg.estimate.source = {
+    [pet_file ',1']
+};
+
+% Other images
+matlabbatch{1}.spm.spatial.coreg.estimate.other = {
+    ''
+};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Cost Function
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+matlabbatch{1}.spm.spatial.coreg.estimate.eoptions.cost_fun = 'nmi';
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Separation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+matlabbatch{1}.spm.spatial.coreg.estimate.eoptions.sep = [4 2];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Tolerances
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+matlabbatch{1}.spm.spatial.coreg.estimate.eoptions.tol = ...
+[0.02 0.02 0.02 ...
+ 0.001 0.001 0.001 ...
+ 0.01 0.01 0.01 ...
+ 0.001 0.001 0.001];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Smoothing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+matlabbatch{1}.spm.spatial.coreg.estimate.eoptions.fwhm = [7 7];
 
 % -------------------------------------------------------------------------
 % Module 2
