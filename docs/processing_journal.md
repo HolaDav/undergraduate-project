@@ -1,15 +1,18 @@
 # Processing Journal
 
+## Project
+Evaluation of a Cloud-Based Quantitative Amyloid PET Imaging Workflow for Resource-Constrained Nigerian Settings
+
 ## 2026-07-25
-
 Created project directory structure.
-
 Created:
 - rawdata/
 - sourcedata/
 - derivatives/
 - qc/
 - logs/
+
+Verified Neurodesk environment.
 
 Imported:
 - 45 AD subjects
@@ -21,11 +24,29 @@ Notes:
 PET images are static 3D PiB images (dim4=1).
 Dynamic motion-correction steps from original CONNExIN workflow are not required.
 
-
 ## 2026-07-26
-
 Implemented BIDS-style renaming.
-
-Created automated manifest generation script.
-
+Created automated manifest generation script (participants.tsv + subject manifest).
 Verified all 79 subjects.
+
+### Centiloid Reference Mask Verification
+Verified Centiloid standard VOIs.
+Files inspected:
+- voi_ctx_2mm.nii
+- voi_WhlCbl_2mm.nii
+
+Findings:
+- MNI space
+- 91 × 109 × 91 dimensions
+- 2 mm isotropic voxel size
+
+Conclusion:
+Masks are compatible with standard Centiloid SUVR calculation following spatial normalization.
+
+### Native Data Inspection
+AD01 MRI and PET images were visually inspected in FSLeyes.
+The MRI and PET images were not initially aligned in native space, which was expected because the modalities were acquired separately and stored in their own coordinate systems.
+No preprocessing was performed at this stage. Alignment between MRI and PET will be achieved using automated PET-to-MRI coregistration (SPM12) during the preprocessing workflow.
+
+## Next Step
+Develop preprocessing workflow for pilot subject AD01.
