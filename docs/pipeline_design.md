@@ -45,14 +45,42 @@ Visual inspection
 
 # Stage 2 – Preprocessing
 
-Purpose
+Purpose:
+Coregister PET to native T1 MRI, segment structural brain tissues, and transform images into standard MNI space for Centiloid quantification.
 
-Transform MRI and PET into standard MNI space suitable for Centiloid
-quantification.
+Software:
+- SPM12 (via MATLAB Compiler Runtime inside Neurodesk)
+- FSL (for visual QC and verification)
 
-Software
+Modular Processing Steps:
 
-SPM12
+- [x] Module 1: PET -> MRI Coregistration (SPM12 coreg.estimate)
+  - Objective: Align native Amyloid PET scan to high-resolution T1 MRI using Normalized Mutual Information (NMI).
+  - Output: Coregistered PET image in native space.
+
+- [x] Module 2: MRI Segmentation (SPM12 preproc)
+  - Objective: Segment T1 MRI into tissue classes (c1-c6), apply bias correction, and generate deformation fields.
+  - Output: Bias-corrected T1 (m*.nii), tissue maps (c1*.nii, c2*.nii), and Forward Deformation Field (y_*.nii).
+
+- [ ] Module 3: PET Normalization to MNI (SPM12 norm.write)
+  - Objective: Apply forward deformation field (y_*.nii) to warp coregistered PET into 2mm isotropic MNI space.
+  - Output: Normalized MNI PET image (wsub-*.nii).
+
+- [ ] Module 4: Spatial Smoothing (SPM12 smooth)
+  - Objective: Apply 8 mm FWHM Gaussian kernel to normalized PET for Centiloid calibration.
+  - Output: Normalized and smoothed PET image (swsub-*.nii).
+
+Output:
+swsub-[subject_id]_trc-pib_pet.nii
+
+QC:
+Visual assessment of:
+- PET/MRI alignment
+- Segmentation quality
+- Normalization to MNI space
+
+---
+
 MATLAB
 FSL
 
