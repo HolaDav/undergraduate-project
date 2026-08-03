@@ -1,5 +1,5 @@
 %-----------------------------------------------------------------------
-% Job saved on 01-Aug-2026 22:45:50 by cfg_util (rev $Rev: 7345 $)
+% Job saved on 03-Aug-2026 00:50:07 by cfg_util (rev $Rev: 7345 $)
 % spm SPM - Unknown
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
@@ -48,3 +48,10 @@ matlabbatch{2}.spm.spatial.preproc.warp.write = [0 1];
 matlabbatch{2}.spm.spatial.preproc.warp.vox = NaN;
 matlabbatch{2}.spm.spatial.preproc.warp.bb = [NaN NaN NaN
                                               NaN NaN NaN];
+matlabbatch{3}.spm.spatial.normalise.write.subj.def(1) = cfg_dep('Segment: Forward Deformations', substruct('.','val', '{}',{2}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','fordef', '()',{':'}));
+matlabbatch{3}.spm.spatial.normalise.write.subj.resample(1) = cfg_dep('Coregister: Estimate: Coregistered Images', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','cfiles'));
+matlabbatch{3}.spm.spatial.normalise.write.woptions.bb = [-90 -126 -72
+                                                          90 90 108];
+matlabbatch{3}.spm.spatial.normalise.write.woptions.vox = [2 2 2];
+matlabbatch{3}.spm.spatial.normalise.write.woptions.interp = 4;
+matlabbatch{3}.spm.spatial.normalise.write.woptions.prefix = 'w';

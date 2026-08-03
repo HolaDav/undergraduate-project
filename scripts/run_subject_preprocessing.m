@@ -3,7 +3,7 @@ function run_subject_preprocessing(base_dir, subject_id)
 %% INITIALIZATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RUN_SUBJECT_PREPROCESSING
-% Automatically runs SPM12 Coregistration and Segmentation for a subject.
+% Automatically runs SPM12 Coregistration, Segmentation, and Normalization.
 %
 % Usage:
 %   run_subject_preprocessing('/path/to/project', 'sub-AD01')
@@ -17,11 +17,11 @@ tpm = fullfile(spm('Dir'), 'tpm', 'TPM.nii');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PATH CONSTRAINTS & FILE VALIDATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Raw File Paths (clean paths for verification)
+% Raw File Paths
 mri_raw = fullfile(base_dir, 'rawdata', subject_id, 'anat', [subject_id, '_T1w.nii']);
 pet_raw = fullfile(base_dir, 'rawdata', subject_id, 'pet',  [subject_id, '_trc-pib_pet.nii']);
 
-% Check file existence before proceeding
+% Check raw input file existence before proceeding
 if ~isfile(mri_raw)
     error('MRI file not found: %s', mri_raw);
 end
@@ -30,9 +30,13 @@ if ~isfile(pet_raw)
     error('PET file not found: %s', pet_raw);
 end
 
-% SPM Volume Specifiers (attaching ',1' for volume selection)
+% SPM Volume Specifiers (attaching ',1' for single-volume selection)
 mri_file = [mri_raw ',1'];
 pet_file = [pet_raw ',1'];
+
+% Clear, Descriptive Derived Output File Paths
+deformation_field = fullfile(base_dir, 'rawdata', subject_id, 'anat', ['y_' subject_id '_T1w.nii']);
+normalized_pet    = fullfile(base_dir, 'rawdata', subject_id, 'pet',  ['w' subject_id '_trc-pib_pet.nii']);
 
 % Print Progress Header
 fprintf('\n===================================================\n');
@@ -100,9 +104,19 @@ matlabbatch{2}.spm.spatial.preproc.warp.reg = [0 0.001 0.5 0.05 0.2];
 matlabbatch{2}.spm.spatial.preproc.warp.affreg = 'mni';
 matlabbatch{2}.spm.spatial.preproc.warp.fwhm = 0;
 matlabbatch{2}.spm.spatial.preproc.warp.samp = 3;
-matlabbatch{2}.spm.spatial.preproc.warp.write = [0 1]; % Forward deformation field (y_*.nii)
+matlabbatch{2}.spm.spatial.preproc.warp.write = [0 1]; % Generates y_*.nii
 matlabbatch{2}.spm.spatial.preproc.warp.vox = NaN;
 matlabbatch{2}.spm.spatial.preproc.warp.bb = [NaN NaN NaN; NaN NaN NaN];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MODULE 3: NORMALISE (WRITE PET TO MNI SPACE)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+matlabbatch{3}.spm.spatial.normalise.write.subj.def = {[deformation_field ',1']};
+matlabbatch{3}.spm.spatial.normalise.write.subj.resample = {pet_file};
+matlabbatch{3}.spm.spatial.normalise.write.woptions.bb = [-90 -126 -72; 90 90 108];
+matlabbatch{3}.spm.spatial.normalise.write.woptions.vox = [2 2 2]; % 2mm isotropic grid for Centiloid VOIs
+matlabbatch{3}.spm.spatial.normalise.write.woptions.interp = 4;
+matlabbatch{3}.spm.spatial.normalise.write.woptions.prefix = 'w';
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% EXECUTION
@@ -112,11 +126,15 @@ spm_jobman('run', matlabbatch);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% POST-EXECUTION OUTPUT VALIDATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-expected_y = fullfile(base_dir, 'rawdata', subject_id, 'anat', ['y_' subject_id '_T1w.nii']);
-
-if ~isfile(expected_y)
-    error('Segmentation completed but deformation field was not created: %s', expected_y);
+if ~isfile(deformation_field)
+    error('Module 2 Failure: Deformation field was not created: %s', deformation_field);
 end
 
-fprintf('Successfully completed Modules 1 & 2 for %s. Deformation field verified.\n\n', subject_id);
+if ~isfile(normalized_pet)
+    error('Module 3 Failure: MNI Normalized PET file was not created: %s', normalized_pet);
+end
+
+fprintf('Successfully completed Modules 1, 2, & 3 for %s.\n', subject_id);
+fprintf(' Verified Forward Deformation Field: %s\n', deformation_field);
+fprintf(' Verified Normalized MNI PET Volume: %s\n\n', normalized_pet);
 end
