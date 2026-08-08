@@ -1,0 +1,72 @@
+Subject:
+sub-AD01
+
+Date:
+2026-08-03
+
+Pipeline version:
+v1.0
+
+Status:
+PASS
+
+Observations:
+
+Initial preprocessing failed because PET origin was not centered.
+
+Manual origin correction was performed using
+SPM Display.
+
+MRI:
+Set Origin
+Reorient
+
+PET:
+Set Origin
+Reorient
+
+Pipeline rerun.
+
+Results:
+
+✓ Coregistration successful
+
+✓ Segmentation successful
+
+✓ Forward deformation field generated
+
+✓ PET normalized to MNI space
+
+Visual QC:
+PASS
+
+Comments:
+
+No obvious distortion.
+PET aligns well with MNI template.
+
+
+2026-08-04
+
+Module 4 (Smoothing) validated on sub-AD01.
+Applied 8mm FWHM Gaussian kernel to
+wsub-AD01_trc-pib_pet.nii via SPM Spatial > Smooth,
+producing swsub-AD01_trc-pib_pet.nii.
+
+One transient failure during first run attempt:
+"Failed to open file spm_write_plane.m ... File
+stream is closed." — appears to be an environment/
+mount-level glitch (possibly CVMFS), not a data or
+config issue. Resolved by fully closing all terminals
+and SPM windows and restarting; second attempt
+completed successfully in ~6 seconds.
+
+Output geometry confirmed unchanged from
+normalisation stage (91x109x91, 2x2x2mm), as
+expected — smoothing blurs values, does not resample
+the grid.
+
+Visual QC done
+
+Conclusion: Module 4 validated for AD01.
+

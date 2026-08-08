@@ -24,3 +24,4 @@ sourcedata/*
 *.log
 __pycache__/
 .DS_Store
+*.mat
