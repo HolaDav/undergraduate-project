@@ -243,3 +243,44 @@ ordering; deformation field frame-index syntax). Manual
 origin correction required again, consistent with prior
 finding that this is a systemic dataset issue rather than
 isolated to AD01.
+
+
+
+## 2026-08-08
+
+### Centiloid conversion applied to sub-AD01, sub-AD02,
+sub-YC101 using the published standard PiB equation
+(Klunk et al., 2015):
+
+  CL = 100 x (SUVR - 1.009) / 1.067
+
+Anchors: YC-0 mean SUVR = 1.009 (0 CL), AD-100 mean
+SUVR = 2.076 (100 CL), from the original Level-1
+Centiloid calibration dataset.
+
+Results:
+  sub-AD01: SUVR 2.2828 -> 119.38 CL
+  sub-AD02: SUVR 2.1032 -> 102.55 CL
+  sub-YC101: SUVR 0.9786 -> -2.85 CL
+
+Both AD subjects exceed 100 CL, consistent with
+typical/advanced AD-range amyloid burden. YC101's
+slightly negative CL is expected and normal - the
+0 CL point is defined as the YC-0 group mean, so
+individual controls scatter on both sides of zero.
+
+Limitation noted: this applies the published standard
+PiB equation directly rather than deriving a locally
+calibrated Level-2 equation from the full GAAIN YC-0
+(n=34) and AD-100 (n=45) reference datasets, which was
+outside the scope of this feasibility study. Considered
+a reasonable approximation given SPM12's methodological
+continuity with the original SPM8-based standard
+pipeline; documented as a limitation rather than an
+unstated assumption.
+
+Next planned step: process additional subjects (AD03,
+AD04, YC102, YC103...) through the full pipeline
+(preprocessing -> QC -> SUVR -> Centiloid in one pass)
+to build a stronger validation dataset before concluding
+pipeline validation.
