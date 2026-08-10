@@ -284,3 +284,43 @@ AD04, YC102, YC103...) through the full pipeline
 (preprocessing -> QC -> SUVR -> Centiloid in one pass)
 to build a stronger validation dataset before concluding
 pipeline validation.
+
+
+## 2026-08-09
+
+### Third pipeline validation run: sub-AD03, Modules 1-4.
+
+Origin correction applied (same corner-origin pattern as
+prior subjects), manual Set Origin + Reorient on T1 and PET
+via SPM Display, before preprocessing.
+
+Execution: two-part script pattern (Part 1: Coregister +
+Segment; Part 2: Normalise + Smooth), same as AD02/YC101.
+No new bugs encountered - both scripts ran cleanly on first
+attempt.
+
+Timings:
+  Coregister: Estimate: 14 seconds (18:28:16-18:28:30)
+  Segment: ~3.5 minutes (18:28:31-18:32:08)
+  Normalise + Smooth: ~2 seconds combined (18:34:48-18:34:50)
+
+Validation:
+  Geometry confirmed: 91x109x91, 2x2x2mm
+  Visual QC (native and MNI space): alignment clean, no
+  shifts/flips/floating
+
+SUVR:
+  Mean cortex uptake: 13.068075
+  Mean whole cerebellum: 5.525003
+  SUVR = 2.3653
+
+Centiloid:
+  CL = 100 x (2.3653 - 1.009) / 1.067 = 127.11
+
+Consistent with prior AD subjects (AD01: 119.38 CL, AD02:
+102.55 CL) - third consecutive AD subject exceeding 100 CL,
+strengthening evidence of correct group-level separation.
+
+Conclusion:
+Modules 1-4 validated for sub-AD03. No new issues found;
+pipeline behaving consistently across three AD subjects.
