@@ -1,0 +1,30 @@
+Subject: sub-AD04
+Date: 2026-08-10
+Pipeline version: v1.2 (batched execution)
+Status: PASS
+
+Observations:
+Same corner-origin issue, manually corrected before batch
+run. First subject processed via looped batch script
+(run_batch_AD04-AD08_part1.m / _part2.m) rather than an
+individual per-subject script.
+
+Results:
+- Coregister: Estimate: 12 seconds
+- Segment: ~4 min 58s
+- Normalise + Smooth: ~3 seconds
+- All modules completed via try/catch-wrapped batch loop,
+  no errors
+
+Visual QC: PASS
+Geometry confirmed 91x109x91, 2x2x2mm. MNI alignment
+confirmed clean via FSLeyes multi-overlay pass across the
+AD04-AD08 batch.
+
+SUVR: Cortex 14.088254, Cerebellum 6.408422, SUVR 2.1984
+Centiloid: 111.47
+
+Comments:
+First subject validated under the new batch execution
+pattern - confirms batching does not compromise result
+quality.

@@ -1,0 +1,24 @@
+Subject: sub-AD05
+Date: 2026-08-10
+Pipeline version: v1.2 (batched execution)
+Status: PASS
+
+Observations:
+Same corner-origin issue, manually corrected. Processed as
+part of the AD04-AD08 batch run.
+
+Results:
+- Coregister: Estimate: ~21 seconds
+- Segment: ~4 min 31s
+- Normalise + Smooth: ~2 seconds
+- Batch execution completed without error
+
+Visual QC: PASS
+Geometry and MNI alignment confirmed clean (batch FSLeyes
+pass).
+
+SUVR: Cortex 14.785519, Cerebellum 6.940607, SUVR 2.1303
+Centiloid: 105.09
+
+Comments:
+Consistent with AD group pattern established so far.

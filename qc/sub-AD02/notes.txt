@@ -1,0 +1,42 @@
+Subject: sub-AD02
+Date: 2026-08-07
+Pipeline version: v1.1 (two-part execution)
+Status: PASS
+
+Observations:
+Same corner-origin issue as AD01 (different corner:
+128,-128,0). Manual origin correction performed (SPM
+Display: Set Origin + Reorient on both T1 and PET).
+
+Two real bugs found and fixed during this run:
+1. Single-batch execution failed pre-run validation because
+   y_sub-AD02_T1w.nii does not exist until Segment completes.
+   Fixed by splitting into Part 1 (Coregister+Segment) and
+   Part 2 (Normalise+Smooth).
+2. Deformation field input incorrectly included a ',1'
+   frame-index suffix, causing SPM's batch file-matcher to
+   fail even though the file existed on disk. Fixed by
+   removing the suffix.
+
+Results:
+- Coregister: Estimate completed in 28 seconds (vs ~20 min
+  on AD01's first uncorrected attempt) - confirms origin
+  correction gives the optimiser a much closer starting
+  point.
+- Segmentation successful
+- Forward deformation field generated
+- PET normalized to MNI space
+
+Visual QC: PASS
+Native-space (PET vs own T1) and MNI-space (swPET vs
+MNI152) alignment both assessed as very clean - cleaner
+than AD01's initial fit.
+
+SUVR: Cortex 649.462394, Cerebellum 308.784584, SUVR 2.1032
+Centiloid: 102.55
+
+Comments:
+Absolute uptake values ~65x larger than AD01's despite
+similar SUVR - noted as a dataset-level scaling/calibration
+difference, not a processing error (SUVR as a ratio is
+robust to this).

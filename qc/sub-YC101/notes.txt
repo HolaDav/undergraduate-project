@@ -1,0 +1,31 @@
+Subject: sub-YC101
+Date: 2026-08-08
+Pipeline version: v1.1 (two-part execution)
+Status: PASS
+
+Observations:
+Same corner-origin issue as AD subjects (0,0,0 pattern).
+Manual origin correction performed. First young control
+(YC) subject processed - validates pipeline generalizes
+across both study groups, not just AD.
+
+Results:
+- Coregister: Estimate: 21 seconds
+- Segment: ~3 min 6s
+- Normalise + Smooth: ~3 seconds
+- All modules completed without error
+
+Visual QC: PASS
+Native-space and MNI-space alignment both assessed as
+"perfect" - cleanest alignment observed to date.
+
+SUVR: Cortex 2.367667, Cerebellum 2.419491, SUVR 0.9786
+Centiloid: -2.85
+
+Comments:
+SUVR near 1.0 as expected for a young cognitively normal
+control (minimal amyloid burden). Slightly negative
+Centiloid is normal and expected - 0 CL is defined as the
+YC-0 group mean, not an individual floor. First real
+evidence of correct AD-vs-YC group separation using this
+pipeline.

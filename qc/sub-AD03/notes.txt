@@ -1,0 +1,28 @@
+Subject: sub-AD03
+Date: 2026-08-09
+Pipeline version: v1.1 (two-part execution)
+Status: PASS
+
+Observations:
+Same corner-origin issue as prior subjects. Manual origin
+correction performed (SPM Display: Set Origin + Reorient on
+both T1 and PET). No new bugs encountered - both Part 1 and
+Part 2 scripts ran cleanly on first attempt.
+
+Results:
+- Coregister: Estimate: 14 seconds
+- Segment: ~3.5 minutes
+- Normalise + Smooth: ~2 seconds combined
+- Forward deformation field generated
+- PET normalized to MNI space
+
+Visual QC: PASS
+Native-space and MNI-space alignment both clean, no
+shifts/flips/floating.
+
+SUVR: Cortex 13.068075, Cerebellum 5.525003, SUVR 2.3653
+Centiloid: 127.11
+
+Comments:
+Third consecutive AD subject exceeding 100 CL. Highest CL
+of the three so far, still within plausible AD-range burden.

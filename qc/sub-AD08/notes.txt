@@ -1,0 +1,28 @@
+Subject: sub-AD08
+Date: 2026-08-10
+Pipeline version: v1.2 (batched execution)
+Status: PASS
+
+Observations:
+Same corner-origin issue, manually corrected. Processed as
+part of the AD04-AD08 batch run.
+
+Results:
+- Coregister: Estimate: ~13 seconds
+- Segment: ~4 min 16s
+- Normalise + Smooth: ~2 seconds
+- Batch execution completed without error
+
+Visual QC: PASS
+Geometry and MNI alignment confirmed clean (batch FSLeyes
+pass).
+
+SUVR: Cortex 8.615778, Cerebellum 4.403099, SUVR 1.9568
+Centiloid: 88.82
+
+Comments:
+First AD-group subject to fall below 100 CL. Geometry and
+visual QC were clean, consistent with the other 4 subjects
+in this batch - treated as expected biological/clinical
+heterogeneity within the AD-labelled group, not a
+processing error.
