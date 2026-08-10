@@ -324,3 +324,56 @@ strengthening evidence of correct group-level separation.
 Conclusion:
 Modules 1-4 validated for sub-AD03. No new issues found;
 pipeline behaving consistently across three AD subjects.
+
+
+### 2026-08-10
+
+## Batch validation run: sub-AD04 through sub-AD08 (5 subjects),
+Modules 1-4.
+
+First use of batched (looped) execution rather than
+per-subject individual scripts. Manual origin correction
+(Set Origin + Reorient) still performed individually per
+subject beforehand -- this remains the one step requiring
+human judgement and was not automated.
+
+Batch Part 1 (Coregister + Segment), looped over all 5
+subjects in a single spm12 script invocation with per-subject
+try/catch error handling: all 5 completed successfully,
+total ~24 minutes. Coregister times ranged 12-24 seconds per
+subject, consistent with prior origin-corrected subjects.
+
+Batch Part 2 (Normalise + Smooth), same looped pattern: all
+5 completed successfully, ~14 seconds total for all 5
+combined.
+
+SUVR extraction also batched via a new shell script
+(scripts/extract_suvr_batch.sh) looping fslstats across
+subjects and computing SUVR + Centiloid in one pass.
+
+Validation:
+  Geometry confirmed for all 5: 91x109x91, 2x2x2mm
+  Visual QC (native and MNI space): clean for all 5
+
+Results:
+  sub-AD04: SUVR 2.1984 -> 111.47 CL
+  sub-AD05: SUVR 2.1303 -> 105.09 CL
+  sub-AD06: SUVR 2.1243 -> 104.53 CL
+  sub-AD07: SUVR 2.1740 -> 109.18 CL
+  sub-AD08: SUVR 1.9568 -> 88.82 CL
+
+sub-AD08 is the first AD-group subject to fall below 100 CL.
+Considered expected biological/clinical heterogeneity within
+the AD-labelled group rather than a processing error --
+geometry and visual QC for AD08 were clean, consistent with
+the other 4 subjects in this batch.
+
+Running total: 8 AD subjects processed (all > 88 CL, 7 of 8
+> 100 CL), 1 YC subject processed (-2.85 CL). Group
+separation direction remains correct and consistent.
+
+Conclusion:
+Batched execution pattern validated across 5 subjects with
+zero failures. This significantly reduces per-subject script-
+writing overhead for remaining subjects; manual origin
+correction remains the rate-limiting manual step.

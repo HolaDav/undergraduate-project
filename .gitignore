@@ -7,18 +7,20 @@
 # 2. Ignore data folder contents completely
 data/*
 
-# 3. Ignore results folder contents completely
+# 3. Ignore results folder contents completely, except figures/tables
 results/*
+!results/figures/
+!results/tables/
+results/figures/*
+results/tables/*
+!results/figures/**/*.png
+!results/figures/**/*.jpg
+!results/figures/**/*.jpeg
+!results/tables/**/*.csv
+!results/tables/**/*.md
 
 #4. Ignore Source Data contents completely
 sourcedata/*
-
-# 5. EXCEPTIONS: Force Git to track your figures and tables
-!results/**/*.png
-!results/**/*.jpg
-!results/**/*.jpeg
-!results/**/*.csv
-!results/**/*.md
 
 # 6. Code environment cleanup
 *.log
