@@ -377,3 +377,57 @@ Batched execution pattern validated across 5 subjects with
 zero failures. This significantly reduces per-subject script-
 writing overhead for remaining subjects; manual origin
 correction remains the rate-limiting manual step.
+
+2026-08-10 (continued)
+
+Batch validation run: sub-AD09 through sub-AD13 (5 subjects
+attempted), Modules 1-4. Continued use of looped batch
+execution pattern established with AD04-AD08.
+
+Batch Part 1 and Part 2 completed without script errors for
+all 5 subjects. Resource snapshot taken once during this
+batch (not per-subject): 3.9GB RAM used, 34GB disk used
+(logged in logs/resource_tracking.csv as a batch-level
+measurement, cpu_usage_percent not_measured).
+
+Visual QC flagged a real issue on sub-AD10: PET appeared
+mirrored relative to MNI template in both sagittal
+(left-right) and axial (superior-inferior) views. Investigated
+via fslhd rather than assumed to be a rendering artifact.
+
+Root cause confirmed: sub-AD10's PET file has qform_code = 0
+and sform_code = 0 (both "Unknown") on a freshly re-copied,
+untouched file from sourcedata/ - i.e. the file has no valid
+orientation metadata at all, not merely a qform/sform
+disagreement like the AD01-style origin issue. Attempted
+fixes (fslorient -copysform2qform) did not resolve the visual
+mirroring, consistent with there being no valid sform to copy
+from in the first place; the earlier "success" of that command
+only updated derived orientation labels, not the underlying
+data handedness.
+
+sub-AD10 excluded from results/tables/suvr_centiloid_summary.csv
+pending dedicated investigation (see docs/flagged_subjects.md).
+Its interim outputs moved to derivatives/flagged/sub-AD10/ to
+keep them clearly separated from validated results.
+
+Confirmed sub-AD11's own header and QC were clean (only AD10
+was affected) - AD11 included in results normally.
+
+Results (4 of 5 subjects):
+  sub-AD09: SUVR 1.9647 -> 89.57 CL
+  sub-AD11: SUVR 2.1381 -> 105.82 CL
+  sub-AD12: SUVR 2.0276 -> 95.47 CL
+  sub-AD13: SUVR 2.0194 -> 94.69 CL
+
+Running total: 12 valid AD subjects processed, 1 YC subject,
+1 AD subject flagged and excluded (AD10).
+
+Conclusion:
+Batching pattern continues to hold for clean subjects.
+First genuinely distinct data-quality failure mode
+identified (missing orientation metadata, as opposed to the
+now well-understood corner-origin issue) - correctly caught
+by visual QC rather than passing silently, validating the
+importance of the two-stage visual QC step even as
+processing is increasingly batched/automated.

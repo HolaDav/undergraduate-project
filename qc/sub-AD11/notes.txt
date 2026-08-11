@@ -1,0 +1,32 @@
+Subject: sub-AD11
+Date: 2026-08-10
+Pipeline version: v1.2 (batched execution)
+Status: PASS
+
+Observations:
+Different corner-origin pattern from most subjects
+(128,-128,0 rather than 0,0,0), flagged in original 79-subject
+screening loop. Manually corrected using the same Set Origin
++ Reorient process - fix applies regardless of which corner
+the origin sat at. Processed as part of the AD09-AD13 batch.
+
+Results:
+- Coregister: Estimate: ~22 seconds
+- Segment: ~5 min 18s
+- Normalise + Smooth: ~2 seconds
+- Batch execution completed without error
+
+Visual QC: PASS
+Own header checked specifically after sub-AD10's mirroring
+issue was found in this same batch - AD11's qform/sform
+confirmed normal and consistent, no orientation issue.
+Geometry and MNI alignment confirmed clean.
+
+SUVR: Cortex 728.644384, Cerebellum 340.784261, SUVR 2.1381
+Centiloid: 105.82
+
+Comments:
+Absolute uptake values much larger than most other subjects
+(similar scale difference to sub-AD02) - consistent with the
+known dataset-level scaling/calibration variation noted
+previously; SUVR remains in the expected AD range regardless.

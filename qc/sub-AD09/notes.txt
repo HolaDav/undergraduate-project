@@ -1,0 +1,25 @@
+Subject: sub-AD09
+Date: 2026-08-10
+Pipeline version: v1.2 (batched execution)
+Status: PASS
+
+Observations:
+Same corner-origin issue, manually corrected. Processed as
+part of the AD09-AD13 batch run.
+
+Results:
+- Coregister: Estimate: ~30 seconds
+- Segment: ~5 min 30s
+- Normalise + Smooth: ~4 seconds
+- Batch execution completed without error
+
+Visual QC: PASS
+Geometry confirmed 91x109x91, 2x2x2mm. MNI alignment
+confirmed clean.
+
+SUVR: Cortex 7.469356, Cerebellum 3.801744, SUVR 1.9647
+Centiloid: 89.57
+
+Comments:
+Resource snapshot during this batch: 3.9GB RAM, 34GB disk
+used (batch-level measurement, not per-subject).

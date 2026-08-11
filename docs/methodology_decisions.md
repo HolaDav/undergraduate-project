@@ -54,3 +54,13 @@ resource tracking begins from sub-AD09 onward, captured via `top`/
 as "not_recorded" in logs/resource_tracking.csv rather than
 estimated or omitted, to keep the record honest about what was and
 wasn't measured.
+
+
+## Centiloid VOI mask location
+Masks (voi_ctx_2mm.nii, voi_WhlCbl_2mm.nii) originally referenced
+directly from sourcedata/Centiloid_Std_VOI/nifti/2mm/ for
+sub-AD01 through sub-AD08 and sub-YC101. From sub-AD09 onward,
+masks are referenced from masks/ (a working copy) for clearer
+path semantics; sourcedata/ retains the original, untouched copy.
+Both paths reference identical files - this is a path/organization
+change only, not a data change.

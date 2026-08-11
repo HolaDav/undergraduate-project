@@ -1,8 +1,8 @@
 #!/bin/bash
-subjects="AD04 AD05 AD06 AD07 AD08"
+subjects="AD09 AD10 AD11 AD12 AD13"
 base_dir="/home/jovyan/Desktop/workspace/undergraduate_project"
-ctx_mask="$base_dir/sourcedata/Centiloid_Std_VOI/nifti/2mm/voi_ctx_2mm.nii"
-cbl_mask="$base_dir/sourcedata/Centiloid_Std_VOI/nifti/2mm/voi_WhlCbl_2mm.nii"
+ctx_mask="$base_dir/masks/voi_ctx_2mm.nii"
+cbl_mask="$base_dir/masks/voi_WhlCbl_2mm.nii"
 
 echo "subject,cortex_mean,cerebellum_mean,suvr,centiloid"
 
