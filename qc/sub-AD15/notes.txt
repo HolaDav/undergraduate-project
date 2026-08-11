@@ -1,0 +1,29 @@
+Subject: sub-AD15
+Date: 2026-08-11
+Pipeline version: v1.3 (batched execution + header sanity check)
+Status: PASS
+
+Observations:
+Same corner-origin issue, manually corrected. Processed as
+part of the AD14-AD18 batch run.
+
+Results:
+- Coregister: Estimate: ~20 seconds
+- Segment: ~4 min 57s
+- Normalise + Smooth: ~3 seconds
+- Batch execution completed without error
+
+Visual QC: PASS (checked twice)
+Header sanity check: qform_code=1, sform_code=2, normal.
+Lowest Centiloid value recorded to date prompted a second,
+more skeptical visual QC pass focused specifically on mask
+placement and alignment quality - confirmed clean both times.
+
+SUVR: Cortex 9.539700, Cerebellum 5.914726, SUVR 1.6129
+Centiloid: 56.60
+
+Comments:
+Notably lower than all prior subjects. No processing or
+alignment defect found on repeated inspection - interpreted
+as genuine clinical heterogeneity within the AD-labelled
+group, not a pipeline error.

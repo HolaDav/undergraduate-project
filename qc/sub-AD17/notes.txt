@@ -1,0 +1,27 @@
+Subject: sub-AD17
+Date: 2026-08-11
+Pipeline version: v1.3 (batched execution + header sanity check)
+Status: PASS
+
+Observations:
+Alternate corner-origin pattern (128,-128,0), manually
+corrected. Processed as part of the AD14-AD18 batch run.
+Longest Segment runtime observed in this batch.
+
+Results:
+- Coregister: Estimate: ~24 seconds
+- Segment: ~8 min 57s
+- Normalise + Smooth: ~3 seconds
+- Batch execution completed without error
+
+Visual QC: PASS
+Header sanity check: qform_code=1, sform_code=2, normal.
+Geometry and MNI alignment confirmed clean.
+
+SUVR: Cortex 772.146223, Cerebellum 430.125966, SUVR 1.7952
+Centiloid: 73.68
+
+Comments:
+Lower than the majority of subjects processed to date but
+not flagged for a repeat check - within a plausible
+continuum alongside sub-AD15/AD16 in this same batch.

@@ -1,0 +1,25 @@
+Subject: sub-AD18
+Date: 2026-08-11
+Pipeline version: v1.3 (batched execution + header sanity check)
+Status: PASS
+
+Observations:
+Same corner-origin issue, manually corrected. Processed as
+part of the AD14-AD18 batch run - last subject in this batch.
+
+Results:
+- Coregister: Estimate: ~14 seconds
+- Segment: ~4 min 30s
+- Normalise + Smooth: ~3 seconds
+- Batch execution completed without error
+
+Visual QC: PASS
+Header sanity check: qform_code=1, sform_code=2, normal.
+Geometry and MNI alignment confirmed clean.
+
+SUVR: Cortex 925.682274, Cerebellum 465.857359, SUVR 1.9871
+Centiloid: 91.66
+
+Comments:
+Highest CL in this batch, back in line with the range seen
+in earlier batches.

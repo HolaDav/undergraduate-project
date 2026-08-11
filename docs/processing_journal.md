@@ -431,3 +431,58 @@ now well-understood corner-origin issue) - correctly caught
 by visual QC rather than passing silently, validating the
 importance of the two-stage visual QC step even as
 processing is increasingly batched/automated.
+
+## 2026-08-11
+
+### Batch validation run: sub-AD14 through sub-AD18 (5 subjects),
+Modules 1-4. Continued looped batch execution pattern.
+
+Manual origin correction performed for all 5 beforehand
+(sub-AD16 and sub-AD17 had the alternate corner-origin
+pattern, 128,-128,0, per original screening - same fix
+applied regardless of which corner).
+
+Batch Part 1 and Part 2 completed without errors for all 5
+subjects. Multiple resource snapshots taken across the run
+(6 total) rather than single before/after measurements:
+RAM climbed from 3.8GB to a peak of 4.2GB over the batch,
+disk 35GB to 36GB. Logged as a range per subject in
+logs/resource_tracking.csv (cpu_usage_percent still
+not_measured).
+
+Added a header sanity check (qform_code/sform_code) to the
+standard QC routine for this batch, following the sub-AD10
+orientation defect found in the previous batch. All 5
+subjects showed qform_code=1, sform_code=2 - normal,
+consistent with all prior valid subjects, no repeat of
+AD10's qform_code=0/sform_code=0 defect.
+
+Visual QC (native and MNI space, both sagittal and axial
+views checked specifically) confirmed clean for all 5.
+
+SUVR results showed a wider spread than prior batches,
+including the two lowest Centiloid values recorded so far:
+  sub-AD14: SUVR 1.9384 -> 87.11 CL
+  sub-AD15: SUVR 1.6129 -> 56.60 CL
+  sub-AD16: SUVR 1.6414 -> 59.27 CL
+  sub-AD17: SUVR 1.7952 -> 73.68 CL
+  sub-AD18: SUVR 1.9871 -> 91.66 CL
+
+sub-AD15 and sub-AD16 in particular are noticeably lower
+than any subject processed to date (previous low: sub-AD08
+at 88.82 CL). Given a second, more skeptical visual QC pass
+- checking specifically these two - showed no header defects
+and no alignment/mask-placement issues, this is interpreted
+as genuine clinical heterogeneity within the AD-labelled
+group rather than a processing error. Noted as expected:
+not every AD-diagnosed subject in a real-world dataset will
+show high amyloid burden.
+
+Running total: 17 valid AD subjects processed, 1 YC subject,
+1 AD subject flagged and excluded (AD10).
+
+Conclusion:
+Batch validated. Header sanity check now a standard part of
+QC going forward, in addition to visual inspection - catches
+orientation-metadata defects like AD10's more directly and
+efficiently than relying on visual impression alone.

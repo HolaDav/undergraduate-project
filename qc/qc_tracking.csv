@@ -13,3 +13,8 @@ sub-AD11,Pass,Pass,Pass (SUVR sanity check only),Pass
 sub-AD12,Pass,Pass,Pass (SUVR sanity check only),Pass
 sub-AD13,Pass,Pass,Pass (SUVR sanity check only),Pass
 sub-AD10,Fail,Not Attempted,Not Attempted,Fail - excluded (see docs/flagged_subjects.md)
+sub-AD14,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD15,Pass,Pass,Pass (double-checked, SUVR + header + repeat visual QC),Pass
+sub-AD16,Pass,Pass,Pass (double-checked, SUVR + header + repeat visual QC),Pass
+sub-AD17,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD18,Pass,Pass,Pass (SUVR sanity check + header check),Pass

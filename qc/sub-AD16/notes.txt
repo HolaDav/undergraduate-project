@@ -1,0 +1,32 @@
+Subject: sub-AD16
+Date: 2026-08-11
+Pipeline version: v1.3 (batched execution + header sanity check)
+Status: PASS
+
+Observations:
+Alternate corner-origin pattern (128,-128,0), manually
+corrected using the same process as the standard (0,0,0)
+pattern. Processed as part of the AD14-AD18 batch run.
+
+Results:
+- Coregister: Estimate: ~19 seconds
+- Segment: ~4 min 56s
+- Normalise + Smooth: ~3 seconds
+- Batch execution completed without error
+
+Visual QC: PASS (checked twice)
+Header sanity check: qform_code=1, sform_code=2, normal.
+Second lowest Centiloid value recorded to date prompted a
+second, more skeptical visual QC pass - confirmed clean
+both times.
+
+SUVR: Cortex 552.623270, Cerebellum 336.669596, SUVR 1.6414
+Centiloid: 59.27
+
+Comments:
+Notably lower than most prior subjects, similar to sub-AD15
+in this same batch. No processing or alignment defect found
+on repeated inspection - interpreted as genuine clinical
+heterogeneity. Absolute uptake values on the larger scale
+seen previously in sub-AD02/AD11 (dataset-level
+scaling/calibration variation), SUVR unaffected as expected.
