@@ -7,21 +7,21 @@ sub-AD05,Pass,Pass,Pass,Pass
 sub-AD06,Pass,Pass,Pass,Pass
 sub-AD07,Pass,Pass,Pass,Pass
 sub-AD08,Pass,Pass,Pass,Pass
+sub-AD09,Pass,Pass,"Pass (SUVR sanity check only)",Pass
+sub-AD10,Fail,Not Attempted,Not Attempted,"Fail - excluded (see docs/flagged_subject.md)"
+sub-AD11,Pass,Pass,"Pass (SUVR sanity check only)",Pass
+sub-AD12,Pass,Pass,"Pass (SUVR sanity check only)",Pass
+sub-AD13,Pass,Pass,"Pass (SUVR sanity check only)",Pass
+sub-AD14,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-AD15,Pass,Pass,"Pass (double-checked, SUVR + header + repeat visual QC)",Pass
+sub-AD16,Pass,Pass,"Pass (double-checked, SUVR + header + repeat visual QC)",Pass
+sub-AD17,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-AD18,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-AD19,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-AD20,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-AD21,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-AD22,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-AD23,Not Attempted,Not Attempted,Not Attempted,"Excluded - flagged pre-processing (see docs/flagged_subjects.md)"
+sub-AD24,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-AD25,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
 sub-YC101,Pass,Pass,Pass,Pass
-sub-AD09,Pass,Pass,Pass (SUVR sanity check only),Pass
-sub-AD11,Pass,Pass,Pass (SUVR sanity check only),Pass
-sub-AD12,Pass,Pass,Pass (SUVR sanity check only),Pass
-sub-AD13,Pass,Pass,Pass (SUVR sanity check only),Pass
-sub-AD10,Fail,Not Attempted,Not Attempted,Fail - excluded (see docs/flagged_subjects.md)
-sub-AD14,Pass,Pass,Pass (SUVR sanity check + header check),Pass
-sub-AD15,Pass,Pass,Pass (double-checked, SUVR + header + repeat visual QC),Pass
-sub-AD16,Pass,Pass,Pass (double-checked, SUVR + header + repeat visual QC),Pass
-sub-AD17,Pass,Pass,Pass (SUVR sanity check + header check),Pass
-sub-AD18,Pass,Pass,Pass (SUVR sanity check + header check),Pass
-sub-AD19,Pass,Pass,Pass (SUVR sanity check + header check),Pass
-sub-AD20,Pass,Pass,Pass (SUVR sanity check + header check),Pass
-sub-AD21,Pass,Pass,Pass (SUVR sanity check + header check),Pass
-sub-AD22,Pass,Pass,Pass (SUVR sanity check + header check),Pass
-sub-AD24,Pass,Pass,Pass (SUVR sanity check + header check),Pass
-sub-AD25,Pass,Pass,Pass (SUVR sanity check + header check),Pass
-sub-AD23,Not Attempted,Not Attempted,Not Attempted,Excluded - flagged pre-processing (see docs/flagged_subjects.md)
