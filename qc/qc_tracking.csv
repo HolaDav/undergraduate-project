@@ -25,3 +25,13 @@ sub-AD23,Not Attempted,Not Attempted,Not Attempted,"Excluded - flagged pre-proce
 sub-AD24,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
 sub-AD25,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
 sub-YC101,Pass,Pass,Pass,Pass
+sub-YC102,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-YC104,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-YC105,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-YC111,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-YC112,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-YC114,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-YC125,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-YC127,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-YC129,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-YC132,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass

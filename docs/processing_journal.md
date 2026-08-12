@@ -545,3 +545,69 @@ defect pattern before beginning YC manual origin correction,
 then process YC subjects to build a proper comparison group
 (currently only 1 YC subject processed against 23 AD
 subjects).
+
+## 2026-08-12
+
+### Batch validation run: 10 YC subjects (sub-YC102, YC104, YC105,
+YC111, YC112, YC114, YC125, YC127, YC129, YC132), Modules 1-4.
+First large-scale YC batch, following pivot from AD group.
+
+Before manual origin correction, ran the same qform_code/
+sform_code defect screen used on the AD group across all 34 YC
+subjects. Result: zero matches - no YC subject shares the
+orientation-metadata defect found in 7 AD-100 subjects
+(AD10/AD23/AD27/AD35/AD37/AD41/AD45). Documented in
+docs/flagged_subjects.md. Suggests the defect is isolated to
+the AD-100 cohort's export/reconstruction rather than a
+dataset-wide issue.
+
+Cross-referenced the original 79-subject origin screening
+(conducted earlier in the project) to confirm which YC subjects
+have the simple, correctable (0,0,0) origin pattern versus the
+separate, more complex "wild value" pattern (23 of 34 YC
+subjects) requiring individual future investigation. This batch
+used only the 10 remaining confirmed-clean subjects (11 of 34
+YC total, including sub-YC101 processed earlier).
+
+Manual origin correction performed for all 10. Batch Part 1 and
+Part 2 completed without errors. Coregister times notably fast
+(10-21 seconds) across all 10, consistent with well-corrected
+starting points. Resource snapshots (7 total): RAM 3.2-4.8GB,
+disk 37-39GB.
+
+Header sanity check and visual QC (native + MNI, all views)
+confirmed clean for all 10.
+
+Results:
+  sub-YC102: SUVR 1.0418 -> 3.08 CL
+  sub-YC104: SUVR 1.0882 -> 7.42 CL
+  sub-YC105: SUVR 1.0701 -> 5.72 CL
+  sub-YC111: SUVR 1.0533 -> 4.15 CL
+  sub-YC112: SUVR 1.1154 -> 9.97 CL
+  sub-YC114: SUVR 1.0572 -> 4.52 CL
+  sub-YC125: SUVR 1.0594 -> 4.73 CL
+  sub-YC127: SUVR 1.0623 -> 4.99 CL
+  sub-YC129: SUVR 1.0230 -> 1.31 CL
+  sub-YC132: SUVR 1.1125 -> 9.70 CL
+
+All 10 tightly clustered near 0 CL (range 1.31-9.97), consistent
+with sub-YC101 (-2.85 CL) and with expected young-control
+amyloid-negative status.
+
+RUNNING TOTALS:
+  AD group: 23 valid, 2 flagged (AD10, AD23), 5 more flagged but
+    unprocessed (AD27, AD35, AD37, AD41, AD45) - CL range
+    56.60-127.64
+  YC group: 11 valid (of 34), 0 flagged for orientation defect,
+    23 remain in the separate "wild origin value" category
+    pending individual investigation - CL range -2.85 to 9.97
+  Total valid subjects: 34
+
+Conclusion:
+Clear, strong group separation now established with a
+reasonable YC sample size (11 subjects) rather than n=1: AD
+group entirely above 56 CL, YC group entirely below 10 CL, no
+overlap. This is the core feasibility result the dissertation
+is built around. Remaining work: investigate the 7 flagged
+orientation-defect AD subjects and the 23 wild-origin-value YC
+subjects as separate, dedicated sessions.

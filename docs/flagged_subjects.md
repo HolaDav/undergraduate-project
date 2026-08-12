@@ -101,3 +101,20 @@ All 7 are excluded from standard processing and flagged for the
 same dedicated investigation approach (visual comparison against
 own T1, manual orientation correction via fslswapdim rather than
 qform/sform copying, since no valid source transform exists).
+
+## YC group screening result (2026-08-12)
+
+The same qform_code/sform_code defect screen was run across
+all 34 YC subjects (sub-YC101 through sub-YC134). Result: zero
+matches. All 34 YC subjects show qform_code=1, sform_code=2 -
+the normal pattern.
+
+This suggests the orientation-metadata defect (found in 7 of 25
+AD-100 subjects: AD10, AD23, AD27, AD35, AD37, AD41, AD45) is
+isolated to the AD-100 cohort specifically, rather than being a
+dataset-wide GAAIN export issue. Possibly indicates a difference
+in how the AD-100 and YC-0 collections were originally processed
+or exported. Worth noting as an observation in the dissertation's
+data-quality discussion, though the underlying cause (scanner,
+reconstruction batch, export tool) cannot be determined from the
+available metadata alone.

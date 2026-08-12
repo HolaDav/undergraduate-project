@@ -1,0 +1,31 @@
+Subject: sub-YC102
+Date: 2026-08-12
+Pipeline version: v1.4 (batched execution, YC group)
+Status: PASS
+
+Observations:
+Standard corner-origin issue, manually corrected. Confirmed
+via original 79-subject screening as part of the "clean"
+(0,0,0) origin subset, distinct from the larger "wild value"
+YC subset pending separate investigation. Processed as part
+of a 10-subject YC batch, following a clean qform_code/
+sform_code screen across all 34 YC subjects (zero matches for
+the AD-group-style orientation defect).
+
+Results:
+- Coregister: Estimate: ~10 seconds
+- Segment: standard timing for this batch
+- Normalise + Smooth: 1-3 seconds
+- Batch execution completed without error
+
+Visual QC: PASS
+Header sanity check: qform_code=1, sform_code=2, normal.
+Geometry (91x109x91, 2x2x2mm) and MNI alignment confirmed
+clean.
+
+SUVR: Cortex 4.913633, Cerebellum 4.716304, SUVR 1.0418
+Centiloid: 3.08
+
+Comments:
+Consistent with expected young-control amyloid-negative
+profile (SUVR near 1.0, CL near 0).
