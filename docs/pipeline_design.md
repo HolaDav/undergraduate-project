@@ -360,8 +360,8 @@ Output:
 - qc/qc_tracking.csv
 
 Current feasibility findings:
-- Successfully processed: 24 subjects
-- Validated Centiloid outputs: 24 subjects
+- Successfully processed: 34 subjects
+- Validated Centiloid outputs: 34 subjects
 - Typical runtime: 3-7 minutes per subject
 - Observed RAM usage: 2.8-4.8 GB
 - Most resource-intensive stage: SPM12 Segmentation
