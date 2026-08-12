@@ -1,5 +1,5 @@
 #!/bin/bash
-subjects="AD14 AD15 AD16 AD17 AD18"
+subjects="AD19 AD20 AD21 AD22 AD24 AD25"
 base_dir="/home/jovyan/Desktop/workspace/undergraduate_project"
 ctx_mask="$base_dir/masks/voi_ctx_2mm.nii"
 cbl_mask="$base_dir/masks/voi_WhlCbl_2mm.nii"

@@ -1,0 +1,28 @@
+Subject: sub-AD25
+Date: 2026-08-11
+Pipeline version: v1.3 (batched execution + header sanity check)
+Status: PASS
+
+Observations:
+Same corner-origin issue, manually corrected. Processed as
+part of the AD19-AD25 batch - final subject in the AD-100
+group processing.
+
+Results:
+- Coregister: Estimate: ~23 seconds
+- Segment: ~4 min 33s
+- Normalise + Smooth: ~1 second
+- Batch execution completed without error
+
+Visual QC: PASS
+Header sanity check: qform_code=1, sform_code=2, normal.
+Geometry and MNI alignment confirmed clean.
+
+SUVR: Cortex 7.107802, Cerebellum 4.318794, SUVR 1.6458
+Centiloid: 59.68
+
+Comments:
+Third AD subject (with sub-AD15, sub-AD16) showing a notably
+lower Centiloid value despite clean QC - consistent with the
+genuine clinical heterogeneity pattern noted in the previous
+batch entry.

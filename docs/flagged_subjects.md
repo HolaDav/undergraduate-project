@@ -35,3 +35,69 @@ orientation, e.g. via fslswapdim, rather than relying on
 copying a non-existent qform/sform).
 
 **Date flagged:** 2026-08-10
+
+
+## sub-AD23
+
+**Issue:** Same defect as sub-AD10 — PET header has no valid
+orientation information at all.
+
+**Root cause (confirmed):** qform_code = 0 (Unknown), sform_code = 0
+(Unknown), found via the standard header sanity check now run
+before manual origin correction (added to workflow after the
+AD10 finding). Not yet visually confirmed via FSLeyes mirroring
+check (unlike AD10, caught before any processing was attempted),
+but the identical qform_code/sform_code pattern to AD10 is treated
+as sufficient grounds to flag proactively rather than attempt
+processing and discover the same failure mode after time invested.
+
+**Status:** Excluded from processing pending the same
+investigation approach planned for sub-AD10 (manual comparison
+against own T1, correct orientation determined manually, fix
+applied via fslswapdim or explicit qform/sform construction rather
+than copying from a non-existent source).
+
+**Significance:** Second subject with this exact defect pattern
+(qform_code=0, sform_code=0) found in the dataset, out of 25 AD
+subjects screened for it so far. Suggests this is a real, if
+uncommon, systematic data-quality issue in a subset of the GAAIN
+PET files, rather than a one-off anomaly — worth investigating
+sub-AD10 and sub-AD23 together, and worth screening the remaining
+unprocessed subjects (AD26 onward, all YC subjects) for the same
+qform_code/sform_code pattern before attempting their manual
+origin correction, to catch this earlier and avoid wasted effort.
+
+**Date flagged:** 2026-08-11
+
+## Full screening result (2026-08-11)
+
+A targeted header screen (qform_code and sform_code, matching the
+exact pattern found in sub-AD10 and sub-AD23) was run across all
+subjects present in rawdata/ at this point. Result: 7 subjects
+share the identical qform_code=0, sform_code=0 defect:
+
+  sub-AD10
+  sub-AD23
+  sub-AD27
+  sub-AD35
+  sub-AD37
+  sub-AD41
+  sub-AD45
+
+All 7 are in the AD group (no YC subjects screened this defect
+pattern yet, as YC processing had not yet begun at time of
+screening - a full YC screen is planned before YC processing
+starts).
+
+This confirms the defect is systematic rather than isolated -
+occurring in multiple subjects across the AD-100 cohort, likely
+originating from a specific source/reconstruction batch within
+the original GAAIN data rather than random per-file corruption.
+Worth investigating whether these 7 subject IDs share a common
+origin (e.g. same scanner site, same reconstruction date) once
+individually inspected.
+
+All 7 are excluded from standard processing and flagged for the
+same dedicated investigation approach (visual comparison against
+own T1, manual orientation correction via fslswapdim rather than
+qform/sform copying, since no valid source transform exists).

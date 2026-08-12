@@ -1,0 +1,24 @@
+Subject: sub-AD21
+Date: 2026-08-11
+Pipeline version: v1.3 (batched execution + header sanity check)
+Status: PASS
+
+Observations:
+Same corner-origin issue, manually corrected. Processed as
+part of the AD19-AD25 batch.
+
+Results:
+- Coregister: Estimate: ~16 seconds
+- Segment: ~3 min 17s
+- Normalise + Smooth: ~2 seconds
+- Batch execution completed without error
+
+Visual QC: PASS
+Header sanity check: qform_code=1, sform_code=2, normal.
+Geometry and MNI alignment confirmed clean.
+
+SUVR: Cortex 5.290806, Cerebellum 2.231549, SUVR 2.3709
+Centiloid: 127.64
+
+Comments:
+Highest Centiloid value recorded in the AD group to date.

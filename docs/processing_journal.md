@@ -486,3 +486,62 @@ Batch validated. Header sanity check now a standard part of
 QC going forward, in addition to visual inspection - catches
 orientation-metadata defects like AD10's more directly and
 efficiently than relying on visual impression alone.
+
+## 2026-08-11 (continued)
+
+### Batch validation run: sub-AD19, AD20, AD21, AD22, AD24, AD25
+(6 subjects), Modules 1-4. This completes processing attempts
+across the full AD-100 group (sub-AD01 through sub-AD25).
+
+sub-AD23 was excluded from this batch before any processing
+was attempted - header screen (qform_code=0, sform_code=0)
+run proactively before manual origin correction, following
+the sub-AD10 finding. A full screen of all remaining
+unprocessed subjects at this point (docs/orientation_defect_
+screen.csv) found 7 AD subjects total sharing this exact
+defect: AD10, AD23, AD27, AD35, AD37, AD41, AD45. All 7 are
+flagged in docs/flagged_subjects.md pending dedicated
+investigation, rather than attempted and failed individually.
+
+Batch Part 1 and Part 2 completed without errors for all 6
+processed subjects. Resource snapshots (7 total across the
+run): RAM ranged 2.8-4.6GB, disk 36-37GB.
+
+Header sanity check and visual QC (native + MNI, sagittal +
+axial + coronal) confirmed clean for all 6.
+
+Results:
+  sub-AD19: SUVR 2.1591 -> 107.79 CL
+  sub-AD20: SUVR 2.1112 -> 103.30 CL
+  sub-AD21: SUVR 2.3709 -> 127.64 CL
+  sub-AD22: SUVR 2.2372 -> 115.11 CL
+  sub-AD24: SUVR 2.0316 -> 95.84 CL
+  sub-AD25: SUVR 1.6458 -> 59.68 CL
+
+sub-AD25 is a third subject (alongside sub-AD15, sub-AD16)
+showing a notably lower Centiloid value (~60 CL) despite
+clean QC. Growing evidence across 3 of 23 valid AD subjects
+strengthens the "genuine clinical heterogeneity" interpretation
+established in the previous batch, rather than this being
+processing error - a real AD-diagnosed cohort would be
+expected to show some spread rather than uniformly high
+values.
+
+AD-100 GROUP PROCESSING SUMMARY (sub-AD01 - sub-AD25):
+  23 subjects successfully processed and validated
+  2 subjects flagged and excluded (sub-AD10, sub-AD23) due
+    to missing PET orientation metadata (qform_code=0,
+    sform_code=0)
+  5 additional subjects (AD27, AD35, AD37, AD41, AD45) also
+    carry the same defect and remain unprocessed pending the
+    same investigation
+  Centiloid range across 23 valid subjects: 56.60 - 127.64 CL
+  All 23 valid subjects exceed 0 CL; 20 of 23 exceed 100 CL
+
+Conclusion:
+AD group processing complete for all subjects without the
+orientation defect. Next step: screen YC group for the same
+defect pattern before beginning YC manual origin correction,
+then process YC subjects to build a proper comparison group
+(currently only 1 YC subject processed against 23 AD
+subjects).

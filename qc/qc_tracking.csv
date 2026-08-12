@@ -18,3 +18,10 @@ sub-AD15,Pass,Pass,Pass (double-checked, SUVR + header + repeat visual QC),Pass
 sub-AD16,Pass,Pass,Pass (double-checked, SUVR + header + repeat visual QC),Pass
 sub-AD17,Pass,Pass,Pass (SUVR sanity check + header check),Pass
 sub-AD18,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD19,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD20,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD21,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD22,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD24,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD25,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD23,Not Attempted,Not Attempted,Not Attempted,Excluded - flagged pre-processing (see docs/flagged_subjects.md)
