@@ -145,8 +145,11 @@ attempt) to 20-30 seconds (AD01 corrected; AD02, YC101), consistent
 with the optimiser starting from a much closer initial alignment.
 
 Status: Validated across all successfully processed AD subjects
-and YC101. Origin correction is now considered a standard
-preprocessing requirement for this dataset.
+and YC subjects (11 of 34 YC subjects processed to date: sub-YC101,
+sub-YC102, sub-YC104, sub-YC105, sub-YC111, sub-YC112, sub-YC114,
+sub-YC125, sub-YC127, sub-YC129, sub-YC132). Origin correction is
+now considered a standard preprocessing requirement for this
+dataset.
 
 ## Known dataset issue: Missing orientation metadata
 
@@ -171,6 +174,14 @@ Affected subjects currently identified:
 
 Header screening is now performed before origin correction and
 preprocessing.
+
+A full screen of the YC group (all 34 subjects) for this same
+defect pattern found zero matches - all YC subjects show normal
+qform_code=1, sform_code=2. This suggests the missing-orientation-
+metadata defect is isolated to the AD-100 cohort's export or
+reconstruction process rather than being a dataset-wide GAAIN
+issue, though the underlying cause cannot be determined from
+available metadata alone.
 
 ---
 
@@ -232,14 +243,18 @@ Two-stage visual assessment per subject, both in FSLeyes:
 Both QC stages have been applied to all processed subjects.
 
 Current QC outcome:
-24 subjects processed and reviewed (23 AD, 1 YC).
-No coregistration failures, normalization failures, image flips, or
-major spatial misalignment were observed among successfully
-processed subjects.
+34 subjects processed and reviewed (23 AD, 11 YC).
+No coregistration failures, normalization failures, or major
+spatial misalignment were observed among successfully processed
+subjects. One image-flip (mirroring) failure mode was found during
+visual QC and traced to a header defect rather than a pipeline
+error.
 
 Two AD subjects (sub-AD10, sub-AD23) were excluded prior to
 quantification because PET orientation metadata were absent
-(qform_code=0, sform_code=0).
+(qform_code=0, sform_code=0). Five further AD subjects
+(AD27, AD35, AD37, AD41, AD45) carry the same defect and remain
+unprocessed. Zero YC subjects show this defect.
 
 ---
 
@@ -282,31 +297,40 @@ centiloid)
 Current results (2026-08-12):
 
 Successfully quantified subjects:
-- AD group: 23 subjects
-- YC group: 1 subject
+- AD group: 23 subjects (of 25 attempted)
+- YC group: 11 subjects (of 34 in cohort)
 
-Excluded:
-- sub-AD10
-- sub-AD23
+Excluded (AD group):
+- sub-AD10, sub-AD23 (processed and confirmed excluded)
+- sub-AD27, sub-AD35, sub-AD37, sub-AD41, sub-AD45 (flagged, not
+  yet attempted)
 Reason: Missing PET orientation metadata (qform_code=0, sform_code=0)
 
+Remaining YC subjects (23 of 34) held back pending investigation of
+a separate, apparently distinct issue: large, inconsistent origin
+coordinates identified in the original 79-subject screening.
+
 Observed Centiloid range:
-- AD group: 56.60 - 127.64 CL
-- YC group: -2.85 CL
+- AD group: 56.60 - 127.64 CL (n=23)
+- YC group: -2.85 to 9.97 CL (n=11)
 
 Observations:
 - All processed AD subjects showed positive amyloid burden
   consistent with the expected direction of group separation.
 - Three AD subjects (sub-AD15, sub-AD16, sub-AD25) showed lower
   Centiloid values (~57-60 CL) despite passing all QC checks,
-  suggesting biological heterogeneity rather than processing failure.
-- The YC subject processed to date (sub-YC101) produced a Centiloid
-  value close to 0 CL, consistent with Centiloid reference
-  expectations.
+  suggesting biological heterogeneity rather than processing
+  failure.
+- All 11 processed YC subjects produced Centiloid values tightly
+  clustered near 0 CL (-2.85 to 9.97), consistent with Centiloid
+  reference expectations for amyloid-negative young controls.
 
 Status:
-Group separation behaves as expected. Further YC processing is
-required to formally evaluate AD-vs-YC separation at the cohort level.
+Clear, non-overlapping group separation established between AD
+(all above 56 CL) and YC (all below 10 CL) groups with a real
+sample size on both sides (n=23 vs n=11), not just a single-subject
+comparison. Considered the core validating result of the
+feasibility study to date.
 
 QC:
 Visual confirmation that VOI masks overlap appropriate anatomy
