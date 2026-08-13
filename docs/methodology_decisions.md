@@ -64,3 +64,37 @@ masks are referenced from masks/ (a working copy) for clearer
 path semantics; sourcedata/ retains the original, untouched copy.
 Both paths reference identical files - this is a path/organization
 change only, not a data change.
+
+## Decision: Scope of origin-precision re-QC following sub-AD01 finding
+
+After discovering that sub-AD01's imprecise initial T1 origin
+click produced a 21 CL difference from a refined re-click (see
+docs/processing_journal.md, 2026-08-13), the question arose of
+whether sub-AD02 and sub-AD03 - also processed relatively early,
+before the current two-stage QC standard was fully established -
+warranted the same re-QC treatment.
+
+Decision: not performed as a blanket policy. Two reasons:
+1. Both sub-AD02 and sub-AD03 passed visual QC without any
+   concern raised at the time of original processing, unlike
+   sub-AD01, which was specifically flagged as showing a slight
+   misalignment before any investigation began.
+2. Coregister: Estimate convergence time is a strong indirect
+   signal of origin-click precision (a poorly-placed origin gives
+   the optimiser a harder starting point, observed directly on
+   sub-AD01's original ~20-minute uncorrected attempt). Both
+   sub-AD02 (28 seconds) and sub-AD03 (14 seconds) converged
+   quickly on their very first origin-corrected attempt, unlike
+   sub-AD01's rough first attempt - suggesting technique was
+   already reasonably precise by that point.
+
+Caveat acknowledged: this signal reflects PET origin precision
+specifically, while sub-AD01's actual issue was in the T1 origin
+(affecting Segment/Normalise, not Coregister) - an imperfect proxy,
+not direct proof. This is documented as a reasoned scope decision
+based on available evidence, not as a claim that no imprecision
+exists elsewhere in the dataset. A full systematic re-QC of all
+subjects against this specific failure mode was judged out of
+scope for this feasibility study, given time constraints and the
+absence of any positive evidence prompting it beyond sub-AD01
+itself.
