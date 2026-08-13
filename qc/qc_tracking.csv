@@ -8,7 +8,7 @@ sub-AD06,Pass,Pass,Pass,Pass
 sub-AD07,Pass,Pass,Pass,Pass
 sub-AD08,Pass,Pass,Pass,Pass
 sub-AD09,Pass,Pass,"Pass (SUVR sanity check only)",Pass
-sub-AD10,Fail,Not Attempted,Not Attempted,"Fail - excluded (see docs/flagged_subject.md)"
+sub-AD10,Pass,Pass,"Pass (SUVR sanity check + header check)","Pass - recovered via DICOM reconversion (see docs/flagged_subjects.md)"
 sub-AD11,Pass,Pass,"Pass (SUVR sanity check only)",Pass
 sub-AD12,Pass,Pass,"Pass (SUVR sanity check only)",Pass
 sub-AD13,Pass,Pass,"Pass (SUVR sanity check only)",Pass

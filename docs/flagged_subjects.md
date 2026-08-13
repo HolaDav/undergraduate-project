@@ -118,3 +118,37 @@ or exported. Worth noting as an observation in the dissertation's
 data-quality discussion, though the underlying cause (scanner,
 reconstruction batch, export tool) cannot be determined from the
 available metadata alone.
+
+## sub-AD10 — RESOLVED (2026-08-12)
+
+**Root cause confirmed:** The NIfTI file originally provided in
+sourcedata/ (AD10_PiB_5070.nii) was produced by a conversion tool
+that failed to write valid orientation metadata (qform_code=0,
+sform_code=0), likely due to a missing DICOM PatientPosition tag
+(0018,5100) - confirmed present as a warning during reconversion.
+
+**Fix:** Reconverted directly from the original DICOM series
+(sourcedata/AD-100_PET_5070/dicom/AD10/, 47 slices) using dcm2niix
+(bundled with the Neurodesk FSL container). The resulting NIfTI
+had valid qform_code=1/sform_code=1 and, on visual inspection, no
+mirroring or flip - confirming the DICOM source data itself was
+never corrupted, only the original NIfTI conversion.
+
+The reconverted file still required standard origin correction
+(Set Origin + Reorient), as its origin defaulted away from brain
+center - same as every other subject in this dataset, and
+unrelated to the orientation defect itself.
+
+Processed successfully through Modules 1-4 after these two fixes.
+Result: SUVR 2.1571, Centiloid 107.60 - consistent with the valid
+AD-group range (56.60-127.64 CL).
+
+**Recovery procedure (to be attempted on remaining flagged
+subjects AD23, AD27, AD35, AD37, AD41, AD45):**
+1. Locate the subject's DICOM series in sourcedata/AD-100_PET_5070/dicom/<ID>/
+2. Run: dcm2niix -o <tmp_dir> -f <ID>_reconverted <dicom_dir>
+3. Check the resulting file's qform_code/sform_code (expect valid,
+   non-zero values if this defect matches AD10's pattern)
+4. Visually confirm no mirroring/flip in FSLeyes
+5. Copy into rawdata/, apply standard Set Origin + Reorient
+6. Proceed through Modules 1-4 as normal

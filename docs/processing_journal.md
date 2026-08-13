@@ -611,3 +611,65 @@ overlap. This is the core feasibility result the dissertation
 is built around. Remaining work: investigate the 7 flagged
 orientation-defect AD subjects and the 23 wild-origin-value YC
 subjects as separate, dedicated sessions.
+
+## 2026-08-12 (continued)
+
+### BREAKTHROUGH: sub-AD10 orientation defect resolved.
+
+Investigated root cause by locating the original DICOM series for
+AD10 in sourcedata/AD-100_PET_5070/dicom/AD10/ (47 files, matching
+the expected dim3=47). Reconverted using dcm2niix (bundled with
+the Neurodesk FSL container). dcm2niix flagged a warning during
+conversion: "Patient Position (0018,5100) not specified" -
+plausible explanation for why the original NIfTI conversion (as
+provided in sourcedata/, AD10_PiB_5070.nii) failed to write valid
+orientation metadata (qform_code=0, sform_code=0).
+
+The dcm2niix-reconverted file showed valid qform_code=1,
+sform_code=1, with orientation labels matching every other
+correctly-functioning subject. Visual inspection confirmed no
+mirroring or flip - the underlying DICOM/scan data was never
+corrupted, only the specific original NIfTI conversion tool's
+output.
+
+Replaced rawdata/sub-AD10/pet/sub-AD10_trc-pib_pet.nii with the
+dcm2niix reconversion. This new file still required standard
+origin correction (Set Origin + Reorient) - its default origin
+was away from brain center, same as nearly every subject in this
+dataset, but this is unrelated to and separate from the
+orientation-metadata defect that was fixed.
+
+Processed through Modules 1-4 (individual run, not batched, given
+the investigative nature of this session). Coregister: Estimate
+completed in 26 seconds, consistent with a properly origin-
+corrected starting point. All QC stages (header check, native-
+space visual QC, MNI-space visual QC) passed cleanly, with
+particular attention paid to sagittal and axial views given
+AD10's specific prior failure mode.
+
+Result:
+  sub-AD10: Cortex 12679.616551, Cerebellum 5878.051190,
+  SUVR 2.1571, Centiloid 107.60
+
+Consistent with the valid AD-group range (56.60-127.64 CL prior
+to this addition).
+
+A general recovery procedure was documented in
+docs/flagged_subjects.md for the remaining 6 flagged subjects
+(AD23, AD27, AD35, AD37, AD41, AD45), which share the identical
+qform_code=0/sform_code=0 defect pattern and may respond to the
+same DICOM-reconversion fix.
+
+Running total: 24 valid AD subjects (up from 23), 11 valid YC
+subjects. 6 AD subjects remain flagged, pending the same recovery
+attempt.
+
+Conclusion:
+This resolves what was initially assumed to be an unfixable data-
+quality exclusion into a genuine methodological finding: an
+apparent NIfTI-conversion tool failure (likely triggered by a
+missing DICOM PatientPosition tag) rather than corrupted source
+data. This is a stronger, more defensible outcome for the
+dissertation than simply excluding the subject - demonstrates the
+pipeline's ability to diagnose and recover from a real data-
+quality problem, not just detect it.

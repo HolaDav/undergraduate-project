@@ -1,14 +1,4 @@
 participant_id,max_ram_gb,cpu_usage_percent,disk_space_gb
-sub-YC102,4.8 (range 3.2-4.8),not_measured,39
-sub-YC104,4.8 (range 3.2-4.8),not_measured,39
-sub-YC105,4.8 (range 3.2-4.8),not_measured,39
-sub-YC111,4.8 (range 3.2-4.8),not_measured,39
-sub-YC112,4.8 (range 3.2-4.8),not_measured,39
-sub-YC114,4.8 (range 3.2-4.8),not_measured,39
-sub-YC125,4.8 (range 3.2-4.8),not_measured,39
-sub-YC127,4.8 (range 3.2-4.8),not_measured,39
-sub-YC129,4.8 (range 3.2-4.8),not_measured,39
-sub-YC132,4.8 (range 3.2-4.8),not_measured,39
 sub-AD01,not_recorded,not_recorded,not_recorded
 sub-AD02,not_recorded,not_recorded,not_recorded
 sub-AD03,not_recorded,not_recorded,not_recorded
@@ -18,9 +8,7 @@ sub-AD06,not_recorded,not_recorded,not_recorded
 sub-AD07,not_recorded,not_recorded,not_recorded
 sub-AD08,not_recorded,not_recorded,not_recorded
 sub-AD09,3.9,not_measured,34
-sub-AD23,N/A,N/A,N/A
-sub-AD23,N/A,N/A,N/A
-sub-AD10,N/A,N/A,N/A
+sub-AD10,4.3 (range 4.1-4.3),not_measured,39
 sub-AD11,3.9,not_measured,34
 sub-AD12,3.9,not_measured,34
 sub-AD13,3.9,not_measured,34
@@ -33,6 +21,17 @@ sub-AD19,4.6 (range 2.8-4.6),not_measured,37
 sub-AD20,4.6 (range 2.8-4.6),not_measured,37
 sub-AD21,4.6 (range 2.8-4.6),not_measured,37
 sub-AD22,4.6 (range 2.8-4.6),not_measured,37
+sub-AD23,N/A,N/A,N/A
 sub-AD24,4.6 (range 2.8-4.6),not_measured,37
 sub-AD25,4.6 (range 2.8-4.6),not_measured,37
 sub-YC101,not_recorded,not_recorded,not_recorded
+sub-YC102,4.8 (range 3.2-4.8),not_measured,39
+sub-YC104,4.8 (range 3.2-4.8),not_measured,39
+sub-YC105,4.8 (range 3.2-4.8),not_measured,39
+sub-YC111,4.8 (range 3.2-4.8),not_measured,39
+sub-YC112,4.8 (range 3.2-4.8),not_measured,39
+sub-YC114,4.8 (range 3.2-4.8),not_measured,39
+sub-YC125,4.8 (range 3.2-4.8),not_measured,39
+sub-YC127,4.8 (range 3.2-4.8),not_measured,39
+sub-YC129,4.8 (range 3.2-4.8),not_measured,39
+sub-YC132,4.8 (range 3.2-4.8),not_measured,39

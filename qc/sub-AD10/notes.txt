@@ -1,0 +1,49 @@
+Subject: sub-AD10
+Date: 2026-08-03 (first attempt, mirroring found), resolved 2026-08-12
+Pipeline version: v1.5 (DICOM reconversion recovery procedure)
+Status: PASS (recovered after prior exclusion)
+
+Observations:
+Originally flagged 2026-08-03/04: PET appeared mirrored relative
+to MNI template (sagittal and axial views), traced to
+qform_code=0, sform_code=0 (no valid orientation metadata) on
+the originally-provided sourcedata/ NIfTI file. Standard fixes
+(fslorient -copysform2qform) did not resolve the issue, since no
+valid sform existed to copy from.
+
+Root cause resolved 2026-08-12: reconverted directly from the
+subject's original DICOM series (47 slices) using dcm2niix. The
+reconverted file had valid orientation metadata (qform_code=1,
+sform_code=1) and, on visual inspection, correct orientation with
+no mirroring - confirming the defect originated in the original
+NIfTI conversion tool, not the scan/DICOM data itself. dcm2niix
+warned of a missing PatientPosition DICOM tag during conversion,
+a plausible trigger for the original conversion failure.
+
+Reconverted PET still required standard origin correction (Set
+Origin + Reorient) before processing - same requirement as every
+other subject, unrelated to the orientation defect.
+
+Results:
+- Coregister: Estimate: 26 seconds
+- Segment: ~6 min
+- Normalise + Smooth: ~5 seconds
+- All modules completed without error
+
+Visual QC: PASS (extra scrutiny applied given prior mirroring
+history)
+Header check: qform_code=1, sform_code=2 (post-Coregister).
+Geometry 91x109x91, 2x2x2mm confirmed. Native-space and MNI-space
+alignment both confirmed clean, sagittal and axial views
+specifically re-checked given the original failure mode.
+
+SUVR: Cortex 12679.616551, Cerebellum 5878.051190, SUVR 2.1571
+Centiloid: 107.60
+
+Comments:
+First subject recovered via DICOM reconversion rather than
+excluded. Absolute uptake values on the larger scale seen in
+sub-AD02/AD11/AD16/AD24 (known dataset-level calibration
+variation). This recovery procedure is documented in
+docs/flagged_subjects.md for attempting on the 6 remaining
+flagged subjects.
