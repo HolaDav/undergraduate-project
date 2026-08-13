@@ -70,3 +70,29 @@ Visual QC done
 
 Conclusion: Module 4 validated for AD01.
 
+
+--- UPDATE 2026-08-13: Re-QC and correction ---
+
+Re-examined using the two-stage visual QC standard developed
+later in the project (this subject's original QC predated that
+standard). Native-space coregistration confirmed correct. MNI-
+space alignment found to have a slight misalignment on close
+sagittal inspection.
+
+Root cause: T1 origin click (this project's very first attempt at
+the Set Origin/Reorient technique) was less precise than later,
+practiced attempts. T1 header itself confirmed normal - not a
+data-quality defect.
+
+Fix: T1 origin re-clicked with practiced precision; Segment,
+Normalise, Smooth re-run (Coregister not repeated, already
+correct).
+
+Impact: SUVR changed from 2.2828 to 2.0615; Centiloid changed from
+119.38 to 98.64 (a 21 CL difference). MNI-space visual QC now
+passes cleanly.
+
+This is documented as a significant finding on manual origin-
+correction precision sensitivity - see docs/processing_journal.md
+2026-08-13 entry for full analysis. results/tables/
+suvr_centiloid_summary.csv updated to reflect the corrected value.

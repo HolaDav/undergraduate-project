@@ -805,3 +805,74 @@ Remaining work: complete YC processing (23 of 34 subjects remain,
 pending investigation of the separate wild-origin-value issue),
 and revisit sub-AD01's original QC using the more rigorous
 two-stage process developed later in the project.
+
+## 2026-08-13 (continued)
+
+### SIGNIFICANT FINDING: sub-AD01 re-QC and origin-precision
+sensitivity analysis.
+
+Revisited sub-AD01 - the very first subject processed in this
+project - applying the more rigorous two-stage visual QC process
+developed later (explicit native-space and MNI-space checks,
+closely inspected sagittal view) rather than trusting the original
+pass, which predated this standard.
+
+Result: native-space coregistration (PET vs own T1) was confirmed
+correctly aligned - Module 1 (Coregister) was never the issue.
+However, MNI-space alignment (swPET vs MNI152 template) showed a
+slight but real misalignment on close sagittal inspection, not
+present in any subject processed after AD01.
+
+Investigation: T1 header confirmed normal (qform_code=1,
+sform_code=2, matching all valid subjects) - ruled out a data-
+quality defect. Since Coregister was independently confirmed
+correct, the issue was isolated to Segment's T1-to-MNI affine
+registration, which depends on the manually-clicked T1 origin as
+its starting point. sub-AD01 was the very first subject on which
+the Set Origin/Reorient technique was ever performed, before
+practice improved click precision (evidenced by Coregister
+convergence times dropping from ~20 minutes on AD01's original
+uncorrected attempt to consistently 10-30 seconds on all
+subsequent subjects).
+
+Fix: re-clicked sub-AD01's T1 origin with the benefit of
+accumulated practice, re-ran Segment, Normalise, and Smooth
+(Coregister/Module 1 was not repeated, since it was already
+confirmed correct and does not depend on the T1 origin refinement).
+
+Result: MNI-space visual QC now passes cleanly, matching the
+standard of all other subjects.
+
+QUANTITATIVE IMPACT:
+  Original (imprecise T1 origin click):
+    Cortex 10.210826, Cerebellum 4.472877, SUVR 2.2828, CL 119.38
+  Refined (precise T1 origin click):
+    Cortex 11.884938, Cerebellum 5.765136, SUVR 2.0615, CL 98.64
+  Difference: 21 CL
+
+This is a genuinely significant finding, not a minor correction:
+manual origin-correction precision has a real, non-trivial effect
+on final Centiloid values, despite both versions passing native-
+space visual QC. This represents a documented source of operator-
+dependent variability inherent to any pipeline requiring manual
+intervention to compensate for header-defective source data (as
+this dataset's AD-100 cohort required for the vast majority of
+subjects). This is considered a legitimate methodological
+limitation to report explicitly, not a flaw to conceal - and
+arguably strengthens the feasibility study by quantifying a real
+source of pipeline variability rather than only reporting clean
+final numbers.
+
+results/tables/suvr_centiloid_summary.csv updated with the refined
+sub-AD01 value (98.64 CL, down from 119.38 CL). This does not
+change AD01's classification (still clearly amyloid-positive,
+still within the valid AD-range pattern) but is a materially
+different number that would affect any statistical summary (mean,
+range) computed across the AD group.
+
+IMPLICATION FOR FUTURE WORK: given this finding, a systematic re-
+QC pass across other early-processed subjects (particularly AD02
+and AD03, processed before the two-stage QC standard was fully
+established) may be warranted, time permitting, to check whether
+similar origin-precision effects are present elsewhere in the
+dataset.
