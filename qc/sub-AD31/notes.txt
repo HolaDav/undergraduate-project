@@ -1,0 +1,28 @@
+Subject: sub-AD31
+Date: 2026-08-13
+Pipeline version: v1.5 (batched execution)
+Status: PASS (normal)
+
+Observations:
+Standard corner-origin issue, manually corrected. Processed as
+part of the final 15-subject AD batch. This batch was interrupted
+partway through by a container-level Bus error crash (during
+sub-AD30's Segment step); resolved via full environment restart,
+resumed cleanly.
+
+Processed without incident.
+
+Results:
+- Batch execution completed (see journal for exact timing and
+  crash/recovery details)
+
+Visual QC: PASS
+Header check: qform_code=1, sform_code=2, normal. Geometry
+91x109x91, 2x2x2mm confirmed. Native-space and MNI-space
+alignment both confirmed clean.
+
+SUVR: Cortex 5.738285, Cerebellum 3.158176, SUVR 1.8170
+Centiloid: 75.72
+
+Comments:
+Part of the batch completing the full 45-subject AD-100 cohort.

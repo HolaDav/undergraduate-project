@@ -35,3 +35,23 @@ sub-YC125,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
 sub-YC127,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
 sub-YC129,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
 sub-YC132,Pass,Pass,"Pass (SUVR sanity check + header check)",Pass
+sub-AD27,Pass,Pass,Pass (SUVR sanity check + header check),Pass - recovered via DICOM reconversion
+sub-AD35,Pass,Pass,Pass (SUVR sanity check + header check),Pass - recovered via DICOM reconversion
+sub-AD37,Pass,Pass,Pass (SUVR sanity check + header check),Pass - recovered via DICOM reconversion
+sub-AD41,Pass,Pass,Pass (SUVR sanity check + header check),Pass - recovered via DICOM reconversion
+sub-AD45,Pass,Pass,Pass (SUVR sanity check + header check),Pass - recovered via DICOM reconversion
+sub-AD26,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD28,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD29,Pass,Pass,Pass (SUVR sanity check + header check),Pass - recovered from write corruption after batch crash
+sub-AD30,Pass,Pass,Pass (SUVR sanity check + header check),Pass - processed after batch crash/restart
+sub-AD31,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD32,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD33,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD34,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD36,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD38,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD39,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD40,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD42,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD43,Pass,Pass,Pass (SUVR sanity check + header check),Pass
+sub-AD44,Pass,Pass,Pass (SUVR sanity check + header check),Pass

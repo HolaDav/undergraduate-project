@@ -1,4 +1,24 @@
 participant_id,max_ram_gb,cpu_usage_percent,disk_space_gb
+sub-AD26,3.8 (range 2.3-3.8),not_measured,42
+sub-AD28,3.8 (range 2.3-3.8),not_measured,42
+sub-AD29,3.8 (range 2.3-3.8),not_measured,42 (rerun after write failure)
+sub-AD30,3.8 (range 2.3-3.8),not_measured,42
+sub-AD31,3.8 (range 2.3-3.8),not_measured,42
+sub-AD32,3.8 (range 2.3-3.8),not_measured,42
+sub-AD33,3.8 (range 2.3-3.8),not_measured,42
+sub-AD34,3.8 (range 2.3-3.8),not_measured,42
+sub-AD36,3.8 (range 2.3-3.8),not_measured,42
+sub-AD38,3.8 (range 2.3-3.8),not_measured,42
+sub-AD39,3.8 (range 2.3-3.8),not_measured,42
+sub-AD40,3.8 (range 2.3-3.8),not_measured,42
+sub-AD42,3.8 (range 2.3-3.8),not_measured,42
+sub-AD43,3.8 (range 2.3-3.8),not_measured,42
+sub-AD44,3.8 (range 2.3-3.8),not_measured,42
+sub-AD27,5.0 (range 4.0-5.0),not_measured,40
+sub-AD35,5.0 (range 4.0-5.0),not_measured,40
+sub-AD37,5.0 (range 4.0-5.0),not_measured,40
+sub-AD41,5.0 (range 4.0-5.0),not_measured,40
+sub-AD45,5.0 (range 4.0-5.0),not_measured,40
 sub-AD01,not_recorded,not_recorded,not_recorded
 sub-AD02,not_recorded,not_recorded,not_recorded
 sub-AD03,not_recorded,not_recorded,not_recorded

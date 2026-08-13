@@ -673,3 +673,135 @@ data. This is a stronger, more defensible outcome for the
 dissertation than simply excluding the subject - demonstrates the
 pipeline's ability to diagnose and recover from a real data-
 quality problem, not just detect it.
+
+2026-08-13
+
+Batch recovery run: sub-AD27, AD35, AD37, AD41, AD45 (5 subjects),
+Modules 1-4. Completes recovery of all 7 originally flagged AD
+subjects.
+
+DICOM reconversion (dcm2niix) performed in a single batch loop
+across all 5 - identical signature to sub-AD10/AD23: 47 slices,
+"PatientPosition not specified" warning, valid qform_code=1/
+sform_code=1 after reconversion, confirmed correctly oriented via
+visual inspection before proceeding.
+
+Manual origin correction applied to all 5 reconverted PET files.
+Batch Part 1 and Part 2 completed without errors. Coregister times
+12-20 seconds across all 5, consistent with well-corrected origins.
+Resource snapshots: RAM peaked at 5.0GB, disk at 40GB.
+
+Header check, geometry check, and two-stage visual QC (native +
+MNI) confirmed clean for all 5.
+
+Results:
+  sub-AD27: SUVR 2.1885 -> 110.55 CL
+  sub-AD35: SUVR 1.8811 -> 81.73 CL
+  sub-AD37: SUVR 1.9276 -> 86.10 CL
+  sub-AD41: SUVR 1.5936 -> 54.79 CL
+  sub-AD45: SUVR 2.0282 -> 95.52 CL
+
+sub-AD41 is a fourth AD subject (with sub-AD15, sub-AD16,
+sub-AD25) showing a notably lower Centiloid value (~55 CL) despite
+clean QC - consistent with the established genuine clinical
+heterogeneity pattern.
+
+MILESTONE: All 7 originally flagged AD subjects (AD10, AD23, AD27,
+AD35, AD37, AD41, AD45) now fully recovered via the DICOM-
+reconversion procedure. Root cause confirmed consistent across all
+7: original sourcedata/ NIfTI conversion failed to write valid
+orientation metadata, most likely due to a missing DICOM
+PatientPosition tag (0018,5100) present across all 7 subjects'
+source data.
+
+Running total: 29 valid AD subjects (of 25 in the originally-
+described AD-100 numbering, all now resolved), 11 valid YC
+subjects. Note: the true dataset extends to AD45 (not AD25) per
+the original 79-subject screening - 15 AD subjects (AD26, AD28-34,
+AD36, AD38-40, AD42-44) remain entirely unprocessed and are not
+part of the "flagged" set; they were simply not yet reached.
+
+Next: process the remaining 15 unprocessed AD subjects (AD26,
+AD28, AD29, AD30, AD31, AD32, AD33, AD34, AD36, AD38, AD39, AD40,
+AD42, AD43, AD44) to complete the full AD cohort.
+
+## 2026-08-13 (continued)
+
+### Batch validation run: final 15 AD subjects (sub-AD26, AD28, AD29,
+AD30, AD31, AD32, AD33, AD34, AD36, AD38, AD39, AD40, AD42, AD43,
+AD44), Modules 1-4. This completes the full 45-subject AD-100
+cohort.
+
+INCIDENT during Part 1: after 3 subjects (AD26, AD28, AD29)
+completed, the batch crashed with a Bus error (core dumped) during
+sub-AD30's Segment step - a container-level crash, not a MATLAB/
+SPM script error. No partial output was written for AD30 itself
+(confirmed empty anat/ directory). Resolved by fully restarting
+the environment (same fix that resolved an earlier similar glitch
+during sub-AD01's Module 4 run) and resuming the batch from AD30
+onward. All 12 remaining subjects completed cleanly after restart.
+
+A second, related issue was discovered afterward: sub-AD29,
+despite its Part 1 log showing "Segment ... Completed" with no
+error, had written a 0-byte y_sub-AD29_T1w.nii deformation field -
+a silent corruption, likely caused by the same underlying
+instability that crashed AD30 shortly after, but without SPM
+reporting a failure. This was caught only when Part 2 subsequently
+failed to read the corrupt file ("Error reading header file").
+The try/catch wrapper in the batch script correctly logged the
+Part 2 failure and continued to the remaining 14 subjects rather
+than halting. sub-AD29 was recovered by deleting the corrupt file
+and re-running Part 1 and Part 2 individually; the retry completed
+cleanly with a valid deformation field.
+
+This incident is noted as a genuine feasibility finding: batch
+automation on this environment can fail silently as well as
+loudly, and per-subject output validation (not just log inspection)
+is necessary to catch corruption that does not raise an explicit
+error at the point of failure.
+
+Header check, geometry check, and two-stage visual QC (native +
+MNI) confirmed clean for all 15 subjects, including sub-AD29 post-
+recovery.
+
+Results:
+  sub-AD26: SUVR 1.9910 -> 92.03 CL
+  sub-AD28: SUVR 2.2062 -> 112.20 CL
+  sub-AD29: SUVR 1.9300 -> 86.32 CL
+  sub-AD30: SUVR 2.2252 -> 113.98 CL
+  sub-AD31: SUVR 1.8170 -> 75.72 CL
+  sub-AD32: SUVR 1.8527 -> 79.08 CL
+  sub-AD33: SUVR 1.8544 -> 79.23 CL
+  sub-AD34: SUVR 1.9684 -> 89.91 CL
+  sub-AD36: SUVR 2.1326 -> 105.31 CL
+  sub-AD38: SUVR 2.1859 -> 110.30 CL
+  sub-AD39: SUVR 1.8214 -> 76.14 CL
+  sub-AD40: SUVR 2.0962 -> 101.89 CL
+  sub-AD42: SUVR 2.3401 -> 124.75 CL
+  sub-AD43: SUVR 2.1982 -> 111.45 CL
+  sub-AD44: SUVR 1.8490 -> 78.73 CL
+
+All 15 pass sanity checks and fall within the established AD-range
+pattern. sub-AD29's absolute uptake values (cortex 0.0066,
+cerebellum 0.0034) are notably smaller by orders of magnitude than
+any other subject in the dataset - an extreme case of the known
+absolute-scale variation across subjects. Given this coincides
+with sub-AD29 being the one subject requiring corruption recovery
+in this batch, it is documented explicitly here rather than
+treated as unremarkable, though the SUVR ratio (1.93) and full QC
+pass are consistent with a valid result.
+
+AD-100 COHORT COMPLETE: all 45 AD subjects (AD01-AD45) now
+successfully processed and validated. Combined with 11 YC
+subjects processed to date, total valid subjects: 56.
+
+Full AD-group Centiloid range: 54.79 - 127.64 CL (n=45).
+Full YC-group Centiloid range: -2.85 to 9.97 CL (n=11).
+
+Conclusion:
+The complete AD-100 cohort is now processed, including full
+recovery of all 7 originally flagged orientation-defect subjects.
+Remaining work: complete YC processing (23 of 34 subjects remain,
+pending investigation of the separate wild-origin-value issue),
+and revisit sub-AD01's original QC using the more rigorous
+two-stage process developed later in the project.

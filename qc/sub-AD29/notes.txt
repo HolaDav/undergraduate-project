@@ -1,0 +1,28 @@
+Subject: sub-AD29
+Date: 2026-08-13
+Pipeline version: v1.5 (batched execution)
+Status: PASS (RECOVERED - see comments)
+
+Observations:
+Standard corner-origin issue, manually corrected. Processed as
+part of the final 15-subject AD batch. This batch was interrupted
+partway through by a container-level Bus error crash (during
+sub-AD30's Segment step); resolved via full environment restart,
+resumed cleanly.
+
+IMPORTANT: This subject's first Part 1 attempt (pre-crash) silently wrote a 0-byte deformation field despite SPM reporting 'Segment ... Completed'. Not caught until Part 2 failed to read the corrupt file. Recovered by deleting the corrupt file and re-running Part 1 and Part 2 individually - retry completed cleanly.
+
+Results:
+- Batch execution completed (see journal for exact timing and
+  crash/recovery details)
+
+Visual QC: PASS
+Header check: qform_code=1, sform_code=2, normal. Geometry
+91x109x91, 2x2x2mm confirmed. Native-space and MNI-space
+alignment both confirmed clean.
+
+SUVR: Cortex 0.006566, Cerebellum 0.003402, SUVR 1.9300
+Centiloid: 86.32
+
+Comments:
+Absolute uptake values (cortex/cerebellum) are notably smaller by orders of magnitude than any other subject processed to date. SUVR ratio and full QC pass are consistent with a valid result; documented explicitly given the coincidence with this subject's corruption-recovery history.

@@ -152,3 +152,60 @@ subjects AD23, AD27, AD35, AD37, AD41, AD45):**
 4. Visually confirm no mirroring/flip in FSLeyes
 5. Copy into rawdata/, apply standard Set Origin + Reorient
 6. Proceed through Modules 1-4 as normal
+
+## sub-AD23 — RESOLVED (2026-08-13)
+
+Same recovery procedure as sub-AD10 applied successfully. DICOM
+reconversion (dcm2niix, 47 slices, same "PatientPosition not
+specified" warning) produced valid qform_code=1/sform_code=1,
+confirmed via visual inspection (no mirroring). Standard origin
+correction applied. Processed through Modules 1-4 without issue.
+
+Coregister: Estimate: 31 seconds (consistent with a well-corrected
+origin).
+
+Result: SUVR 1.9987, Centiloid 92.76 - consistent with valid
+AD-group range.
+
+Second successful recovery using the documented procedure - the
+fix generalizes beyond sub-AD10, as expected given the identical
+DICOM warning and header signature.
+
+## sub-AD27, sub-AD35, sub-AD37, sub-AD41, sub-AD45 — ALL RESOLVED (2026-08-13)
+
+Same recovery procedure applied in a single batch. All 5 showed
+the identical signature: 47 DICOM slices, dcm2niix "PatientPosition
+not specified" warning, and valid qform_code=1/sform_code=1 after
+reconversion. All 5 confirmed correctly oriented via visual
+inspection before proceeding.
+
+Batch-processed through Modules 1-4 (Part 1 and Part 2 scripts,
+5 subjects each). All completed without error. Header checks,
+geometry checks, and two-stage visual QC (native + MNI) confirmed
+clean for all 5.
+
+Results:
+  sub-AD27: SUVR 2.1885 -> 110.55 CL
+  sub-AD35: SUVR 1.8811 -> 81.73 CL
+  sub-AD37: SUVR 1.9276 -> 86.10 CL
+  sub-AD41: SUVR 1.5936 -> 54.79 CL
+  sub-AD45: SUVR 2.0282 -> 95.52 CL
+
+sub-AD41 joins sub-AD15, sub-AD16, sub-AD25 as a fourth AD subject
+showing a notably lower Centiloid value (~55 CL) despite clean QC
+throughout - consistent with the established genuine clinical
+heterogeneity interpretation.
+
+FLAGGED SUBJECT RECOVERY SUMMARY:
+All 7 originally flagged AD-100 subjects (AD10, AD23, AD27, AD35,
+AD37, AD41, AD45) have now been successfully recovered using the
+same DICOM-reconversion procedure. Root cause was consistent
+across all 7: the original sourcedata/ NIfTI conversion failed to
+produce valid orientation metadata, most likely triggered by a
+missing DICOM PatientPosition tag (0018,5100) present in all 7
+subjects' raw DICOM data. Reconversion via dcm2niix, followed by
+standard origin correction, fully resolved every case.
+
+The AD-100 cohort processing is now complete: 25 of 25 subjects
+successfully processed and validated. No AD subjects remain
+excluded.

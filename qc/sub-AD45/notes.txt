@@ -1,0 +1,30 @@
+Subject: sub-AD45
+Date: 2026-08-13
+Pipeline version: v1.5 (DICOM reconversion recovery procedure)
+Status: PASS (recovered)
+
+Observations:
+Originally flagged for qform_code=0/sform_code=0 orientation
+defect, same pattern as sub-AD10 and sub-AD23. Recovered via
+DICOM reconversion (dcm2niix, 47 slices, same "PatientPosition
+not specified" warning). Reconverted file confirmed correctly
+oriented via visual inspection before processing. Standard
+manual origin correction still required and applied (separate
+from the orientation-metadata fix). Processed as part of a
+5-subject batch recovery run.
+
+Results:
+- Batch execution completed without error
+- Coregister: Estimate: 12-20 seconds range across this batch
+
+Visual QC: PASS
+Header check: qform_code=1, sform_code=2 (post-Coregister).
+Geometry 91x109x91, 2x2x2mm confirmed. Native-space and MNI-space
+alignment both confirmed clean.
+
+SUVR: Cortex 11563.365775, Cerebellum 5701.301810, SUVR 2.0282
+Centiloid: 95.52
+
+Comments:
+Part of the full 7-subject flagged-AD recovery (see
+docs/flagged_subjects.md for the complete root-cause analysis).
