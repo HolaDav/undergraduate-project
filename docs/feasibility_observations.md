@@ -1,6 +1,6 @@
 # Feasibility Observations
 
-Date Updated: 2026-08-13
+Date Updated: 2026-08-14
 
 ### Objective:
 Assess whether a quantitative amyloid PET Centiloid workflow can be
@@ -10,84 +10,74 @@ SPM12 standalone and FSL.
 ------------------------------------------------------------
 ## Dataset Progress
 
-AD subjects (full cohort): 45
-Successfully processed and validated: 45 (100%)
+FULL DATASET COMPLETE.
+
+AD-100 cohort: 45 of 45 subjects processed and validated (100%)
   - 38 processed via the standard workflow
   - 7 recovered via DICOM reconversion after an initial
     orientation-metadata defect (AD10, AD23, AD27, AD35, AD37,
-    AD41, AD45) - see docs/flagged_subjects.md
-Excluded: 0
+    AD41, AD45)
 
-YC subjects (full cohort): 34
-Successfully processed and validated: 11 (32%)
-Remaining: 23, held back pending individual investigation of a
-  separate issue - large, inconsistent, non-corner origin
-  coordinates identified in the original 79-subject screening,
-  distinct from the AD-group orientation-metadata defect (which
-  a full 34-subject screen confirmed does not affect any YC
-  subject)
+YC-0 cohort: 34 of 34 subjects processed and validated (100%)
+  - 11 processed via the standard workflow (clean corner-origin
+    pattern)
+  - 23 required the same manual origin correction after being
+    initially set aside due to large, inconsistent origin
+    coordinates - investigation confirmed these had valid headers
+    throughout and responded to the standard fix once identified
 
-Total valid subjects processed to date: 56 (45 AD, 11 YC)
+Total: 79 of 79 subjects in the original dataset (100%)
+No subjects were ultimately excluded from the final dataset.
 
 ------------------------------------------------------------
 ## Runtime Observations
 
-Typical processing time per subject (steady-state, after origin
-correction workflow established): 3-9 minutes
-
+Typical processing time per subject (steady-state): 3-9 minutes
 Longest runtime observed: ~9 minutes (sub-AD17)
-
 Initial pilot subject (AD01): ~45 minutes, reflecting workflow
-development and troubleshooting rather than steady-state
-performance.
+development rather than steady-state performance.
 
 Batching: from sub-AD04 onward, subjects processed in looped
-batches (5-15 subjects per script invocation), substantially
-reducing script-writing overhead without changing per-subject
-processing logic or runtime.
-
-One container-level crash (Bus error) occurred during a 15-subject
-batch, resolved by a full environment restart with no data loss
-beyond one subject requiring an isolated rerun (see Quality
-Control Outcomes below).
+batches (5-22 subjects per script invocation), substantially
+reducing script-writing overhead. The largest single batch (22 YC
+subjects) completed without incident.
 
 ------------------------------------------------------------
 ## Memory Usage
 
-Observed RAM range: 2.3 GB - 5.0 GB
+Observed RAM range: 2.2 GB - 5.0 GB
 Peak observed RAM: 5.0 GB
 Most resource-intensive stage: MRI Segmentation (SPM12)
 
-Note: resource tracking was not measured for the first 9 subjects
-processed (sub-AD01 - sub-AD08, sub-YC101); documented in
-docs/methodology_decisions.md. All subjects from sub-AD09 onward
-have recorded measurements (RAM and disk; CPU% not measured -
-free -h/df -h snapshots do not capture CPU utilisation).
+Resource tracking was not measured for the first 9 subjects
+processed and for one individually-processed subject
+(sub-AD23), documented transparently as not_recorded/N/A in
+logs/resource_tracking.csv rather than estimated.
 
 ------------------------------------------------------------
 ## Storage Usage
 
-Disk usage remained well within available laptop resources
-throughout processing (34GB-43GB observed, on a system with 1TB
-total capacity).
+Disk usage remained well within available resources throughout
+(34GB-46GB observed, on a system with 1TB total capacity).
 No storage-related failures observed.
 
 ------------------------------------------------------------
 ## Manual Intervention Requirements
 
-Required:
-1. PET/T1 origin correction using SPM Display (Set Origin +
-   Reorient) - required for the large majority of subjects in
-   both groups, due to a systematic dataset-level issue placing
-   PET origins at image corners rather than brain centre
-2. Visual QC using FSLeyes (native-space and MNI-space, two
-   separate checks per subject)
-3. Header screening (qform/sform validation) - added after the
-   sub-AD10 finding, now performed proactively before origin
-   correction on any new batch
+Required, across the full dataset:
+1. PET/T1 origin correction using SPM Display - required for the
+   large majority of subjects in both groups (standard corner-
+   origin pattern, plus the 23 YC subjects with less regular
+   origin coordinates - same fix applied once headers were
+   confirmed valid)
+2. Two-stage visual QC using FSLeyes (native-space and MNI-space)
+   per subject
+3. Header screening (qform/sform validation), performed
+   proactively before origin correction from partway through the
+   AD cohort onward
 4. For 7 AD subjects: DICOM reconversion (dcm2niix) to recover
-   from a missing-orientation-metadata defect in the originally
-   provided NIfTI files
+   from missing orientation metadata in the originally provided
+   NIfTI files
 
 Not required:
 - Motion correction
@@ -95,80 +85,89 @@ Not required:
 - High-performance computing
 - MATLAB license
 
-Observed impact of manual step precision: a retrospective re-
-examination of the first subject processed (sub-AD01) found that
-origin-click precision materially affects the final Centiloid
-value (21 CL difference between an imprecise first attempt and a
-refined re-click) despite both passing native-space visual QC.
-This is documented as a genuine source of operator-dependent
-variability inherent to manual-correction-based workflows - see
-docs/processing_journal.md, 2026-08-13.
+Documented sensitivity: a retrospective re-examination of the
+first subject processed (sub-AD01) found that origin-click
+precision materially affects the final Centiloid value (21 CL
+difference between an imprecise and refined attempt), despite both
+passing native-space visual QC. This is a genuine limitation of
+manual-correction-dependent workflows, not fully resolved for the
+whole dataset (see docs/methodology_decisions.md for the scope
+decision on this point).
 
 ------------------------------------------------------------
 ## Quality Control Outcomes
 
-Successful subjects: 56 (45 AD, 11 YC)
-QC pass rate: 100% among subjects that passed the pre-processing
-header screen and were carried through to completion
+Successful subjects: 79 of 79 (100%)
+QC pass rate: 100% among subjects carried through to completion
 
-Failure modes discovered:
-1. PET origin placed at image corner rather than brain centre
-   (majority of subjects, both groups) - corrected via manual
-   Set Origin/Reorient; causes silent misalignment, not a visible
-   error, detected only via visual QC.
+Failure modes discovered and resolved across the full dataset:
+1. PET origin at image corner rather than brain centre (majority
+   of subjects, both groups) - silent misalignment, corrected via
+   manual origin correction, detected via visual QC.
 2. Missing PET orientation metadata (qform_code=0, sform_code=0) -
-   found in 7 of 45 AD subjects, 0 of 34 YC subjects. Root cause
-   traced to a failed original NIfTI conversion, most likely
-   triggered by a missing DICOM PatientPosition tag (confirmed
-   present in all 7 affected subjects' raw DICOM data). Fully
-   recovered via reconversion from source DICOM using dcm2niix.
-3. Origin-correction precision sensitivity: a materially different
-   Centiloid value can result from imprecise vs refined manual
-   origin clicks on the same subject, despite both passing native-
-   space visual QC (see sub-AD01 finding above).
-4. One container-level crash (Bus error) during a large (15-
-   subject) batch run, and one associated silent output-corruption
-   case (a 0-byte deformation field written without SPM reporting
-   an error) - both resolved via environment restart and isolated
-   subject rerun. Demonstrates that automated batch processing on
-   this platform can fail silently as well as loudly, making per-
-   subject output validation (not log inspection alone) necessary.
-5. A separate, apparently distinct issue affecting 23 of 34 YC
-   subjects: large, inconsistent (non-corner) origin coordinates.
-   Not yet individually investigated; unknown whether the standard
-   origin-correction fix applies.
+   7 of 45 AD subjects, 0 of 34 YC subjects. Root cause: failed
+   original NIfTI conversion, likely triggered by a missing DICOM
+   PatientPosition tag (confirmed present in all 7 affected
+   subjects' source DICOM data). Fully recovered via dcm2niix
+   reconversion from source.
+3. Origin-correction precision sensitivity (1 subject, sub-AD01) -
+   quantified 21 CL impact from origin-click imprecision.
+4. One container-level crash (Bus error) and one associated
+   silent output-corruption case (0-byte deformation field, no
+   SPM-reported error) during a 15-subject AD batch - resolved via
+   environment restart and isolated subject rerun.
+5. Large, inconsistent (non-corner) origin coordinates in 23 of 34
+   YC subjects - initially treated as a distinct, unexplained
+   issue; investigation found valid headers throughout, and the
+   standard origin-correction fix applied directly once confirmed.
+6. One missed manual origin-correction step during batch setup (1
+   YC subject, sub-YC131) - caught by visual QC (PET visibly
+   outside expected bounds), resolved by a full redo from source
+   data.
+
+Every failure mode listed above was identified through the
+project's own QC procedures (header screening, two-stage visual
+QC, or output validation) rather than by chance - supporting the
+robustness of the QC design itself as a feasibility finding.
 
 ------------------------------------------------------------
 ## Feasibility Conclusion
 
 The pipeline is feasible on modest laptop hardware using
-Neurodesk, SPM12 standalone and FSL. Quantitative Centiloid
-generation was successfully demonstrated across the complete
-45-subject AD cohort and 11 YC subjects, with acceptable runtime,
-memory usage, and reproducibility.
+Neurodesk, SPM12 standalone and FSL. The complete 79-subject
+dataset (45 AD, 34 YC) was successfully processed and quantified,
+with acceptable runtime, memory usage, and full reproducibility
+documentation.
 
-A clear, non-overlapping group-level separation was observed: AD
-group Centiloid range 54.79-127.64 CL (n=45); YC group Centiloid
-range -2.85 to 9.97 CL (n=11). This is consistent with expected
-Centiloid scale behaviour (YC-0 anchored near 0 CL, AD-100
-anchored near 100 CL) and supports the technical validity of the
-implemented workflow.
+A clear, non-overlapping group-level separation was observed
+across the complete dataset: AD group Centiloid range 54.79-127.64
+CL (n=45); YC group Centiloid range -5.66 to 11.78 CL (n=34). This
+is consistent with expected Centiloid scale behaviour and provides
+strong support for the technical validity of the implemented
+workflow at full dataset scale, not just a preliminary subsample.
 
 The primary limitations encountered throughout were dataset
-quality issues (PET header/orientation metadata defects,
-requiring manual correction and, in some cases, source-data
-reconversion) rather than computational capacity, software
-availability, or workflow complexity. A further limitation,
-identified through retrospective investigation rather than assumed
-in advance, is that manual origin-correction introduces real,
-quantifiable operator-dependent variability into final results.
+quality issues (multiple distinct types of PET header/orientation
+defects, requiring varying degrees of manual correction and, in
+some cases, source-data reconversion) rather than computational
+capacity, software availability, or workflow complexity. A further
+limitation, identified through retrospective investigation, is
+that manual origin-correction introduces real, quantifiable
+operator-dependent variability into final results for at least one
+documented subject, with the possibility (not fully investigated)
+that this affects others.
 
 Taken together, these findings support a specific and defensible
 feasibility conclusion: cloud-based amyloid PET Centiloid
 processing on modest hardware is technically achievable without
-specialised infrastructure, but requires deliberate, documented
-quality-control procedures - automated where possible, and
-explicitly acknowledged as a source of variability where manual
-intervention remains necessary. This is considered a core
-contribution of the present study, alongside the numerical results
-themselves.
+specialised infrastructure, and can be carried through to
+completion on a real-world, imperfect dataset - but requires
+deliberate, iteratively-developed quality-control procedures, and
+these procedures themselves (not just the final numerical results)
+are a core, reportable contribution of this feasibility study. Six
+distinct failure modes were identified and resolved over the
+course of the project, each through a QC mechanism specifically
+designed to catch that class of problem; this progression - from
+ad hoc troubleshooting on the first subject to systematic,
+proactive screening by the end - is itself evidence of a maturing,
+increasingly robust and reproducible processing workflow.

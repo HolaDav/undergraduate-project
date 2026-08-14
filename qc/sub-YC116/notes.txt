@@ -1,0 +1,31 @@
+Subject: sub-YC116
+Date: 2026-08-14
+Pipeline version: v1.5 (batched execution)
+Status: PASS
+
+Observations:
+Originally in the "wild origin value" category (large,
+inconsistent, non-corner origin coordinates) identified in the
+original 79-subject screening, distinct from both the standard
+corner-origin pattern and the AD-group orientation-metadata
+defect. Header check confirmed valid qform_code=1/sform_code=2,
+ruling out any data-quality defect - standard manual origin
+correction applied directly.
+
+normal
+
+Results:
+- Batch execution completed without error (except where noted
+  above)
+
+Visual QC: PASS
+Header check: qform_code=1, sform_code=2, normal. Geometry
+91x109x91, 2x2x2mm confirmed. Native-space and MNI-space alignment
+both confirmed clean.
+
+SUVR: Cortex 3.454966, Cerebellum 3.498821, SUVR 0.9875
+Centiloid: -2.02
+
+Comments:
+Part of the batch completing the full 34-subject YC-0 cohort and,
+combined with the AD-100 cohort, the complete 79-subject dataset.

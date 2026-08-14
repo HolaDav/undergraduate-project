@@ -876,3 +876,86 @@ and AD03, processed before the two-stage QC standard was fully
 established) may be warranted, time permitting, to check whether
 similar origin-precision effects are present elsewhere in the
 dataset.
+
+2026-08-14
+
+MILESTONE: Full 79-subject dataset complete.
+
+Investigated and resolved the final category of unprocessed
+subjects: 23 YC subjects with large, inconsistent (non-corner)
+origin coordinates, identified in the original 79-subject
+screening but set aside pending investigation.
+
+Diagnostic approach: tested 3 subjects spanning the apparent
+sub-patterns in the origin values (sub-YC103, sub-YC109,
+sub-YC116). Header check confirmed all three had completely valid
+orientation metadata (qform_code=1, sform_code=2) - ruling out the
+AD-group-style defect immediately. This meant the "wild values"
+were large but internally consistent origin offsets, not corrupted
+headers - the standard Set Origin + Reorient technique was
+hypothesised to apply directly.
+
+Test case sub-YC103 (most extreme offsets) was processed
+individually first: Coregister converged in 21 seconds (consistent
+with a well-corrected origin), full QC passed cleanly, SUVR 0.9864
+-> -2.11 CL, consistent with the existing YC group. Hypothesis
+confirmed.
+
+Remaining 22 subjects (YC106, YC107, YC108, YC109, YC110, YC113,
+YC115, YC116, YC117, YC118, YC119, YC120, YC121, YC122, YC123,
+YC124, YC126, YC128, YC130, YC131, YC133, YC134) processed as a
+single large batch after manual origin correction on all 22.
+Completed without a container crash this time (RAM stayed
+2.2-3.0GB throughout).
+
+One subject-specific error was caught during visual QC: sub-YC131
+showed a clearly misaligned PET (visibly out of bounds relative to
+MNI) - traced to the manual PET origin correction having been
+missed for this subject during the batch's setup, while the T1 was
+corrected. Resolved by restoring both files fresh from sourcedata/,
+redoing origin correction on both T1 and PET, and re-running Part 1
+and Part 2 individually for sub-YC131 alone. Re-check confirmed
+clean.
+
+All 22 subjects (plus the retested sub-YC103) pass header check,
+geometry check, and two-stage visual QC. SUVR/Centiloid results
+tightly clustered near 0 CL (range -5.66 to 11.78), consistent with
+the existing 12 YC subjects and expected young-control amyloid-
+negative status.
+
+FULL DATASET COMPLETE:
+  AD-100 cohort: 45 of 45 subjects processed and validated (100%)
+  YC-0 cohort: 34 of 34 subjects processed and validated (100%)
+  Total: 79 of 79 original subjects (100%)
+
+Final Centiloid ranges:
+  AD group: 54.79 - 127.64 CL (n=45)
+  YC group: -5.66 to 11.78 CL (n=34)
+
+Group separation is clean and complete: no overlap between the two
+groups across the full dataset, with sample sizes on both sides
+sufficient to support the feasibility study's core claim.
+
+Data-quality issues encountered and resolved across the full
+dataset:
+  - Corner-origin placement (majority of subjects, both groups):
+    manual correction
+  - Missing orientation metadata (7 of 45 AD subjects): DICOM
+    reconversion + manual correction
+  - Wild/inconsistent origin coordinates (23 of 34 YC subjects):
+    manual correction (same fix as corner-origin, once headers
+    confirmed valid)
+  - Origin-correction precision sensitivity (1 subject, sub-AD01,
+    documented as an inherent limitation): re-correction
+  - One container-level crash and one associated silent write
+    corruption (1 AD subject): environment restart + rerun
+  - One missed manual correction step, caught by visual QC (1 YC
+    subject, sub-YC131): full redo from source
+
+Conclusion:
+This completes primary data processing for the feasibility study.
+Every subject in the original GAAIN-derived dataset has now been
+either successfully processed or, where genuinely unprocessable,
+would have been explicitly documented as such - in this case, all
+79 subjects were ultimately recoverable. Remaining work shifts to
+analysis, documentation consolidation, and dissertation writing.

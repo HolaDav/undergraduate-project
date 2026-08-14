@@ -98,3 +98,24 @@ subjects against this specific failure mode was judged out of
 scope for this feasibility study, given time constraints and the
 absence of any positive evidence prompting it beyond sub-AD01
 itself.
+
+## Decision: diagnostic-subject-first approach for the YC wild-origin-value issue
+
+Rather than immediately batch-processing all 23 affected YC
+subjects, 3 subjects spanning the apparent sub-patterns in the
+origin coordinate values were selected for individual header
+inspection first (sub-YC103, sub-YC109, sub-YC116), followed by
+full individual processing of the most extreme case (sub-YC103)
+before committing to a batch of the remaining 22.
+
+Reason: this issue was initially unexplained, unlike the by-then
+well-understood corner-origin pattern. Given the AD-group
+orientation-metadata defect had previously required a genuinely
+different fix (DICOM reconversion, not just origin correction),
+it was not safe to assume the standard fix would apply here without
+verification. This mirrors the approach taken for sub-AD10 before
+the other 6 flagged AD subjects were batched.
+
+Outcome: confirmed the standard fix applied directly (valid headers
+throughout), justifying full-batch processing of the remaining 22
+with confidence, rather than processing them individually.

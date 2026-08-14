@@ -1,4 +1,27 @@
 participant_id,max_ram_gb,cpu_usage_percent,disk_space_gb
+sub-YC106,3.0 (range 2.2-3.0),not_measured,46
+sub-YC107,3.0 (range 2.2-3.0),not_measured,46
+sub-YC108,3.0 (range 2.2-3.0),not_measured,46
+sub-YC109,3.0 (range 2.2-3.0),not_measured,46
+sub-YC110,3.0 (range 2.2-3.0),not_measured,46
+sub-YC113,3.0 (range 2.2-3.0),not_measured,46
+sub-YC115,3.0 (range 2.2-3.0),not_measured,46
+sub-YC116,3.0 (range 2.2-3.0),not_measured,46
+sub-YC117,3.0 (range 2.2-3.0),not_measured,46
+sub-YC118,3.0 (range 2.2-3.0),not_measured,46
+sub-YC119,3.0 (range 2.2-3.0),not_measured,46
+sub-YC120,3.0 (range 2.2-3.0),not_measured,46
+sub-YC121,3.0 (range 2.2-3.0),not_measured,46
+sub-YC122,3.0 (range 2.2-3.0),not_measured,46
+sub-YC123,3.0 (range 2.2-3.0),not_measured,46
+sub-YC124,3.0 (range 2.2-3.0),not_measured,46
+sub-YC126,3.0 (range 2.2-3.0),not_measured,46
+sub-YC128,3.0 (range 2.2-3.0),not_measured,46
+sub-YC130,3.0 (range 2.2-3.0),not_measured,46
+sub-YC131,3.0 (range 2.2-3.0),not_measured,46 (redone)
+sub-YC133,3.0 (range 2.2-3.0),not_measured,46
+sub-YC134,3.0 (range 2.2-3.0),not_measured,46
+sub-YC103,4.1 (range 4.1-4.8),not_measured,43
 sub-AD26,3.8 (range 2.3-3.8),not_measured,42
 sub-AD28,3.8 (range 2.3-3.8),not_measured,42
 sub-AD29,3.8 (range 2.3-3.8),not_measured,42 (rerun after write failure)
