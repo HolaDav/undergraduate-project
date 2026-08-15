@@ -13,9 +13,11 @@ results/*
 !results/tables/
 results/figures/*
 results/tables/*
+!results/figures/**/
 !results/figures/**/*.png
 !results/figures/**/*.jpg
 !results/figures/**/*.jpeg
+!results/figures/**/*.md
 !results/tables/**/*.csv
 !results/tables/**/*.md
 
