@@ -78,6 +78,20 @@ print(f"Group comparison test: {test_name}")
 print(f"  Statistic = {stat_val:.4f}")
 print(f"  p-value = {p_val:.2e}")
 print(f"  {effect_name} = {effect_size:.4f}")
+
+# 95% CI for mean difference (only meaningful/reported for the t-test case)
+ci_lower = ci_upper = mean_diff = None
+if both_normal:
+    mean_diff = np.mean(ad) - np.mean(yc)
+    var1, var2 = np.var(ad, ddof=1), np.var(yc, ddof=1)
+    se_diff = np.sqrt(var1/len(ad) + var2/len(yc))
+    df_welch = (var1/len(ad) + var2/len(yc))**2 / (
+        (var1/len(ad))**2/(len(ad)-1) + (var2/len(yc))**2/(len(yc)-1))
+    t_crit = stats.t.ppf(0.975, df_welch)
+    ci_lower = mean_diff - t_crit * se_diff
+    ci_upper = mean_diff + t_crit * se_diff
+    print(f"  Mean difference (AD - YC) = {mean_diff:.2f} CL")
+    print(f"  95% CI of mean difference = [{ci_lower:.2f}, {ci_upper:.2f}]")
 print()
 
 # --- Save results to text file ---
@@ -95,6 +109,9 @@ with open('results/tables/group_comparison_results.txt', 'w') as f:
     f.write(f"  Statistic = {stat_val:.4f}\n")
     f.write(f"  p-value = {p_val:.2e}\n")
     f.write(f"  {effect_name} = {effect_size:.4f}\n")
+    if mean_diff is not None:
+        f.write(f"  Mean difference (AD - YC) = {mean_diff:.2f} CL\n")
+        f.write(f"  95% CI of mean difference = [{ci_lower:.2f}, {ci_upper:.2f}]\n")
 
 # --- Save descriptive table as CSV ---
 desc_df.to_csv('results/tables/group_descriptive_stats.csv', index=False)

@@ -17,3 +17,5 @@ Group comparison test: Independent-samples t-test (unequal variance)
   Statistic = 33.2554
   p-value = 1.69e-36
   Cohen's d = 6.6760
+  Mean difference (AD - YC) = 93.09 CL
+  95% CI of mean difference = [87.48, 98.71]
